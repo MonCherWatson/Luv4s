@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':rest')
+    compile project(':domain')
+}
