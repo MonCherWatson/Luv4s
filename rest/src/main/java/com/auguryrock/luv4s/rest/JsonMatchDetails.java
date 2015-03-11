@@ -9,7 +9,7 @@ import java.util.List;
  * Created by p127638 on 18.02.2015.
  */
 @JsonIgnoreProperties({"scores"})
-public class WvWMatchDetails {
+public class JsonMatchDetails {
     @JsonProperty("match_id")
     protected String matchId;
     @JsonProperty("maps")

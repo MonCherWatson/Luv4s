@@ -7,11 +7,11 @@ import java.util.List;
 /**
  * Created by p127638 on 18.02.2015.
  */
-public class WvWMatches {
+public class JsonMatches {
     @JsonProperty("wvw_matches")
-    protected List<WvWMatch> wvWMatches;
+    protected List<JsonMatch> jsonMatches;
 
-    public List<WvWMatch> getWvWMatches() {
-        return wvWMatches;
+    public List<JsonMatch> getJsonMatches() {
+        return jsonMatches;
     }
 }

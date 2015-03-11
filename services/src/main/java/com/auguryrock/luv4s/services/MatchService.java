@@ -6,7 +6,7 @@ import com.auguryrock.luv4s.domain.World;
 import com.auguryrock.luv4s.rest.Gw2V1Client;
 import com.auguryrock.luv4s.rest.Gw2V2Client;
 import com.auguryrock.luv4s.rest.JsonWorld;
-import com.auguryrock.luv4s.rest.WvWMatch;
+import com.auguryrock.luv4s.rest.JsonMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class MatchService {
         final Map<Integer, String> worldNames = getWorldNames();
 
         final ArrayList<Match> matches = new ArrayList<Match>();
-        for (WvWMatch gw2Match : gw2V1Client.getAllMatches().getWvWMatches()) {
+        for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
             Match match = new Match(gw2Match.getId());
             match.getWorlds().add(new World(gw2Match.getBlueWorldId(), Colours.BLUE, worldNames.get(gw2Match.getBlueWorldId())));
             match.getWorlds().add(new World(gw2Match.getGreenWorldId(), Colours.GREEN, worldNames.get(gw2Match.getGreenWorldId())));

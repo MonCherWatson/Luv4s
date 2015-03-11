@@ -15,14 +15,14 @@ public class Gw2V1ClientTest {
     @Test
     public void testGetAllMatches() throws Exception {
         // https://api.guildwars2.com/v1/wvw/matches.json
-        final WvWMatches allMatches = gw2V1Client.getAllMatches();
+        final JsonMatches allMatches = gw2V1Client.getAllMatches();
         System.out.println(allMatches);
     }
 
     @Test
     public void testGetMatchDetails() throws Exception {
         // https://api.guildwars2.com/v1/wvw/match_details.json
-        final String id = gw2V1Client.getAllMatches().getWvWMatches().get(0).getId();
+        final String id = gw2V1Client.getAllMatches().getJsonMatches().get(0).getId();
         gw2V1Client.getMatchDetails(id);
     }
 

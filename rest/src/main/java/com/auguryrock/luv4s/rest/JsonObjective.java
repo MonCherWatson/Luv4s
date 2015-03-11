@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by p127638 on 18.02.2015.
  */
 @JsonIgnoreProperties({"owner_guild", "bonuses"})
-public class Objective {
+public class JsonObjective {
     @JsonProperty("id")
     protected String id;
     @JsonProperty("owner")

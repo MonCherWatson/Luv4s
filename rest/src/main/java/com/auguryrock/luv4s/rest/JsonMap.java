@@ -13,5 +13,5 @@ public class JsonMap {
     @JsonProperty("type")
     protected String type;
     @JsonProperty("objectives")
-    protected List<Objective> objectives;
+    protected List<JsonObjective> jsonObjectives;
 }

@@ -2,7 +2,6 @@ package com.auguryrock.luv4s.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 /**
@@ -12,11 +11,11 @@ import javax.ws.rs.QueryParam;
 public interface Gw2V1Client {
     @Path("/wvw/matches.json")
     @GET
-    WvWMatches getAllMatches();
+    JsonMatches getAllMatches();
 
     @Path("/wvw/match_details.json")
     @GET
-    WvWMatchDetails getMatchDetails(@QueryParam("match_id") String matchId);
+    JsonMatchDetails getMatchDetails(@QueryParam("match_id") String matchId);
 
 
 }

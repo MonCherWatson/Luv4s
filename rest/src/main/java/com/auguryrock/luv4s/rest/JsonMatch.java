@@ -7,15 +7,15 @@ import java.util.Date;
 /**
  * Created by p127638 on 18.02.2015.
  */
-public class WvWMatch {
+public class JsonMatch {
     @JsonProperty("wvw_match_id")
     protected String id;
     @JsonProperty("red_world_id")
-    protected String redWorldId;
+    protected Integer redWorldId;
     @JsonProperty("blue_world_id")
-    protected String blueWorldId;
+    protected Integer blueWorldId;
     @JsonProperty("green_world_id")
-    protected String greenWorldId;
+    protected Integer greenWorldId;
     @JsonProperty("start_time")
     protected Date startTime;
     @JsonProperty("end_time")
@@ -25,15 +25,15 @@ public class WvWMatch {
         return id;
     }
 
-    public String getRedWorldId() {
+    public Integer getRedWorldId() {
         return redWorldId;
     }
 
-    public String getBlueWorldId() {
+    public Integer getBlueWorldId() {
         return blueWorldId;
     }
 
-    public String getGreenWorldId() {
+    public Integer getGreenWorldId() {
         return greenWorldId;
     }
 }
