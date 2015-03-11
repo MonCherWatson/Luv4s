@@ -10,11 +10,13 @@ import java.util.List;
 public class World {
     protected String id;
     protected Colours colour;
+    protected String name;
     protected List<Map> maps = new ArrayList<Map>();
 
-    public World(String id, Colours colour) {
+    public World(String id, Colours colour, String name) {
         this.id = id;
         this.colour = colour;
+        this.name = name;
     }
 
     public World() {

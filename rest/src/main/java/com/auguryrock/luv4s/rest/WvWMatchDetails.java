@@ -13,5 +13,5 @@ public class WvWMatchDetails {
     @JsonProperty("match_id")
     protected String matchId;
     @JsonProperty("maps")
-    protected List<WvWMap> maps;
+    protected List<JsonMap> maps;
 }

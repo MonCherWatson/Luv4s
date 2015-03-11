@@ -1,31 +1,29 @@
 package com.auguryrock.luv4s.rest;
 
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-rest.xml"})
-public class Gw2WvWClientTest {
+public class Gw2V1ClientTest {
     @Autowired
-    Gw2WvWClient gw2WvWClient;
+    Gw2V1Client gw2V1Client;
 
     @Test
     public void testGetAllMatches() throws Exception {
         // https://api.guildwars2.com/v1/wvw/matches.json
-        gw2WvWClient.getAllMatches();
+        final WvWMatches allMatches = gw2V1Client.getAllMatches();
+        System.out.println(allMatches);
     }
 
     @Test
     public void testGetMatchDetails() throws Exception {
         // https://api.guildwars2.com/v1/wvw/match_details.json
-        final String id = gw2WvWClient.getAllMatches().getWvWMatches().get(0).getId();
-        gw2WvWClient.getMatchDetails(id);
+        final String id = gw2V1Client.getAllMatches().getWvWMatches().get(0).getId();
+        gw2V1Client.getMatchDetails(id);
     }
 
 }
