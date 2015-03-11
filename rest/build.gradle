@@ -3,7 +3,7 @@ dependencies {
     compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.0.3'
     compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxrs', version: '3.0.3'
     compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
-    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-core', version: '2.5.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
 //    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-databind', version: '2.5.1'
 
 }
