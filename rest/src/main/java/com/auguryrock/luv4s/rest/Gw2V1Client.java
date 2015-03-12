@@ -3,6 +3,7 @@ package com.auguryrock.luv4s.rest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.List;
 
 /**
  * Created by p127638 on 18.02.2015.
