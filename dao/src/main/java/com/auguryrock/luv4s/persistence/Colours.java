@@ -1,5 +1,5 @@
 package com.auguryrock.luv4s.persistence;
 
 public enum Colours {
-    Red, Green, Bleue
+    Red, Green, Blue
 }

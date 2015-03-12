@@ -25,7 +25,7 @@ public class MatchService {
         final ArrayList<Match> matches = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
             Match match = new Match(gw2Match.getId());
-            match.getWorlds().add(new World(gw2Match.getBlueWorldId(), Colours.Bleue, worldNames.get(gw2Match.getBlueWorldId())));
+            match.getWorlds().add(new World(gw2Match.getBlueWorldId(), Colours.Blue, worldNames.get(gw2Match.getBlueWorldId())));
             match.getWorlds().add(new World(gw2Match.getGreenWorldId(), Colours.Green, worldNames.get(gw2Match.getGreenWorldId())));
             match.getWorlds().add(new World(gw2Match.getRedWorldId(), Colours.Red, worldNames.get(gw2Match.getRedWorldId())));
             matches.add(match);

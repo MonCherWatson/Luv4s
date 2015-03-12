@@ -1,8 +1,11 @@
 package com.auguryrock.luv4s.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class World {
+    @Id
     protected Integer id;
     protected Colours colour;
     protected String name;
@@ -14,5 +17,17 @@ public class World {
     }
 
     public World() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Colours getColour() {
+        return colour;
+    }
+
+    public String getName() {
+        return name;
     }
 }
