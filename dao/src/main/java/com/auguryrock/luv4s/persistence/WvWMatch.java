@@ -1,26 +1,32 @@
 package com.auguryrock.luv4s.persistence;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class Match {
+@Entity
+public class WvWMatch {
+    @Id
     protected String id;
-    protected List<World> worlds = new ArrayList<World>();
+    @OneToMany(cascade = CascadeType.ALL)
+    protected Set<World> worlds = new HashSet<>();
+    @Transient
     protected List<WvWMap> wvwMaps = new ArrayList<WvWMap>();
 
-    public Match() {
-
+    public WvWMatch(String id) {
+        this.id = id;
     }
 
-    public Match(String id) {
-        this.id = id;
+    public WvWMatch(){
     }
 
     public String getId() {
         return id;
     }
 
-    public List<World> getWorlds() {
+    public Set<World> getWorlds() {
         return worlds;
     }
 
