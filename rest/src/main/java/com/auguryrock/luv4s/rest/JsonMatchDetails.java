@@ -14,4 +14,8 @@ public class JsonMatchDetails {
     protected String matchId;
     @JsonProperty("maps")
     protected List<JsonMap> maps;
+
+    public List<JsonMap> getMaps() {
+        return maps;
+    }
 }

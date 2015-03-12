@@ -11,5 +11,17 @@ public class JsonObjective {
     @JsonProperty("id")
     protected String id;
     @JsonProperty("owner")
-    protected String owner;
+    protected Owner owner;
+
+    public String getId() {
+        return id;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public enum Owner {
+        Red, Green, Blue
+    }
 }

@@ -14,4 +14,12 @@ public class JsonMap {
     protected String type;
     @JsonProperty("objectives")
     protected List<JsonObjective> jsonObjectives;
+
+    public String getType() {
+        return type;
+    }
+
+    public List<JsonObjective> getJsonObjectives() {
+        return jsonObjectives;
+    }
 }

@@ -2,25 +2,37 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:http="http://cxf.apache.org/transports/http/configuration"
        xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-       xsi:schemaLocation="
-      http://cxf.apache.org/transports/http/configuration
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://cxf.apache.org/transports/http/configuration
       http://cxf.apache.org/schemas/configuration/http-conf.xsd
       http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://cxf.apache.org/jaxrs-client
       http://cxf.apache.org/schemas/jaxrs-client.xsd
       http://cxf.apache.org/jaxrs
-      http://cxf.apache.org/schemas/jaxrs.xsd">
+      http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <http:conduit name="https://api.guildwars2.com/v1/.*">
+
+    <context:component-scan base-package="com.auguryrock.luv4s"/>
+
+    <http:conduit name="https://api.guildwars2.com/.*">
     </http:conduit>
 
     <jaxrs-client:client id="gw2WvWClient"
-                         address="https://api.guildwars2.com/v1"
-                         serviceClass="com.auguryrock.luv4s.rest.Gw2WvWClient">
+                         address="https://api.guildwars2.com"
+                         serviceClass="com.auguryrock.luv4s.rest.Gw2V1Client">
         <jaxrs-client:providers>
             <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </jaxrs-client:providers>
     </jaxrs-client:client>
+
+    <jaxrs-client:client id="gw2V2Client"
+                         address="https://api.guildwars2.com"
+                         serviceClass="com.auguryrock.luv4s.rest.Gw2V2Client">
+        <jaxrs-client:providers>
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </jaxrs-client:providers>
+    </jaxrs-client:client>
+
 
 </beans>
