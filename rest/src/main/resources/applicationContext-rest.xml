@@ -13,12 +13,12 @@
       http://cxf.apache.org/schemas/jaxrs.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="com.auguryrock.luv4s"/>
+    <context:component-scan base-package="com.auguryrock.luv4s.rest"/>
 
     <http:conduit name="https://api.guildwars2.com/.*">
     </http:conduit>
 
-    <jaxrs-client:client id="gw2WvWClient"
+    <jaxrs-client:client id="gw2V1Client"
                          address="https://api.guildwars2.com"
                          serviceClass="com.auguryrock.luv4s.rest.Gw2V1Client">
         <jaxrs-client:providers>
