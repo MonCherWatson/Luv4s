@@ -12,12 +12,12 @@ public class World {
     @ManyToOne
     protected WvWMatch match;
     protected Colours colour;
+    @Transient
     protected String name;
 
-    public World(Integer id, Colours colour, String name) {
+    public World(Integer id, Colours colour) {
         this.id = id;
         this.colour = colour;
-        this.name = name;
     }
 
     public World() {
@@ -41,6 +41,10 @@ public class World {
 
     public void setMatch(WvWMatch match) {
         this.match = match;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

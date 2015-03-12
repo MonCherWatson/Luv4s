@@ -9,6 +9,8 @@ import java.util.List;
 public interface Gw2V2Client {
     @Path("/worlds")
     @GET
-    public List<JsonWorld> getAllWorlds(@QueryParam("ids") String ids, @QueryParam("lang") String lang);
+    public List<JsonWorld> getWorlds(@QueryParam("ids") String ids, @QueryParam("lang") String lang);
+
+    String ALL_WORDS = "all";
 
 }

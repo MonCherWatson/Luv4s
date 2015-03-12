@@ -20,7 +20,7 @@ public class WorldRepositoryTest {
     @Test
     @Transactional
     public void testCrud() {
-        World world = new World(1, Colours.Blue, "toto");
+        World world = new World(1, Colours.Blue);
         worldRepository.save(world);
 
         final World one = worldRepository.findOne(1);
@@ -28,7 +28,6 @@ public class WorldRepositoryTest {
         assertThat(one).isNotNull();
         assertThat(one.getId()).isEqualTo(1);
         assertThat(one.getColour()).isEqualTo(Colours.Blue);
-        assertThat(one.getName()).isEqualTo("toto");
     }
 
     @AfterTransaction

@@ -27,9 +27,9 @@ public class WvWMatchRepositoryTest {
     public void test_crud() {
         final WvWMatch match = new WvWMatch("matchId");
 
-        World world1 = new World(1, Colours.Blue, "blue");
-        World world2 = new World(2, Colours.Red, "red");
-        World world3 = new World(3, Colours.Green, "green");
+        World world1 = new World(1, Colours.Blue);
+        World world2 = new World(2, Colours.Red);
+        World world3 = new World(3, Colours.Green);
 
         match.getWorlds().add(world1);
         match.getWorlds().add(world2);
