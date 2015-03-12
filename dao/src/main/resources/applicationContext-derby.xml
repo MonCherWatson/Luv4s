@@ -12,7 +12,7 @@
 
     <jpa:repositories base-package="com.auguryrock.luv4s.persistence"/>
 
-    <context:component-scan base-package="com.auguryrock.luv4s"/>
+    <context:component-scan base-package="com.auguryrock.luv4s.persistence"/>
 
     <jdbc:embedded-database id="dataSource" type="DERBY">
         <jdbc:script location="classpath:/schema.sql"/>
