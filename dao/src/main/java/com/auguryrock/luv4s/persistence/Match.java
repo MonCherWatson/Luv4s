@@ -1,11 +1,8 @@
-package com.auguryrock.luv4s.domain;
+package com.auguryrock.luv4s.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by p127638 on 18.02.2015.
- */
 public class Match {
     protected String id;
     protected List<World> worlds = new ArrayList<World>();

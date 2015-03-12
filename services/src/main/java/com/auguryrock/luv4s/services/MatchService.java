@@ -1,9 +1,9 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.domain.Colours;
-import com.auguryrock.luv4s.domain.Match;
-import com.auguryrock.luv4s.domain.World;
-import com.auguryrock.luv4s.domain.WvWMap;
+import com.auguryrock.luv4s.persistence.Colours;
+import com.auguryrock.luv4s.persistence.Match;
+import com.auguryrock.luv4s.persistence.World;
+import com.auguryrock.luv4s.persistence.WvWMap;
 import com.auguryrock.luv4s.rest.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by p127638 on 18.02.2015.
- */
 @Component
 public class MatchService {
     @Autowired
@@ -28,9 +25,9 @@ public class MatchService {
         final ArrayList<Match> matches = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
             Match match = new Match(gw2Match.getId());
-            match.getWorlds().add(new World(gw2Match.getBlueWorldId(), Colours.BLUE, worldNames.get(gw2Match.getBlueWorldId())));
-            match.getWorlds().add(new World(gw2Match.getGreenWorldId(), Colours.GREEN, worldNames.get(gw2Match.getGreenWorldId())));
-            match.getWorlds().add(new World(gw2Match.getRedWorldId(), Colours.RED, worldNames.get(gw2Match.getRedWorldId())));
+            match.getWorlds().add(new World(gw2Match.getBlueWorldId(), Colours.Bleue, worldNames.get(gw2Match.getBlueWorldId())));
+            match.getWorlds().add(new World(gw2Match.getGreenWorldId(), Colours.Green, worldNames.get(gw2Match.getGreenWorldId())));
+            match.getWorlds().add(new World(gw2Match.getRedWorldId(), Colours.Red, worldNames.get(gw2Match.getRedWorldId())));
             matches.add(match);
         }
         return matches;
@@ -51,7 +48,6 @@ public class MatchService {
             WvWMap wvwMap = new WvWMap();
             wvwMap.setType(WvWMap.Type.valueOf(jsonMap.getType()));
             for (JsonObjective jsonObjective : jsonMap.getJsonObjectives()) {
-                jsonObjective.
             }
         }
 

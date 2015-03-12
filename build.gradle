@@ -12,8 +12,11 @@ subprojects {
         compile group: 'org.springframework', name: 'spring-test', version: '4.1.5.RELEASE'
         compile group: 'org.springframework', name: 'spring-beans', version: '4.1.5.RELEASE'
         compile group: 'org.springframework', name: 'spring-context', version: '4.1.5.RELEASE'
-        compile group: 'org.springframework', name: 'spring-data-jpa', version: '4.1.5.RELEASE'
+        compile group: 'org.springframework', name: 'spring-orm', version: '4.1.5.RELEASE'
+        compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.7.2.RELEASE'
+        compile 'org.hibernate:hibernate-core:4.3.8.Final'
         testCompile 'junit:junit:4.12'
+        testCompile 'org.assertj:assertj-core:2.0.0'
     }
 
     version = '1.0'

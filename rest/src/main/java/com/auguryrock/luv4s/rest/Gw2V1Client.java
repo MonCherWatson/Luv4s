@@ -5,9 +5,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import java.util.List;
 
-/**
- * Created by p127638 on 18.02.2015.
- */
 @Path("/v1")
 public interface Gw2V1Client {
     @Path("/wvw/matches.json")

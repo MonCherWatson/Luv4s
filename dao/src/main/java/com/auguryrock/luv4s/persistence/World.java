@@ -1,17 +1,11 @@
-package com.auguryrock.luv4s.domain;
+package com.auguryrock.luv4s.persistence;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by p127638 on 17.02.2015.
- */
+@Entity
 public class World {
     protected Integer id;
     protected Colours colour;
     protected String name;
-    protected List<WvWMap> wvwMaps = new ArrayList<WvWMap>();
 
     public World(Integer id, Colours colour, String name) {
         this.id = id;

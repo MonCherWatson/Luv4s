@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-/**
- * Created by p127638 on 18.02.2015.
- */
 public class JsonMatch {
     @JsonProperty("wvw_match_id")
     protected String id;
