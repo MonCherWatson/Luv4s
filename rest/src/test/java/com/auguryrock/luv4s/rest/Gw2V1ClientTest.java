@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-rest.xml"})
 public class Gw2V1ClientTest {
@@ -25,5 +27,6 @@ public class Gw2V1ClientTest {
         final String id = gw2V1Client.getAllMatches().getJsonMatches().get(0).getId();
         gw2V1Client.getMatchDetails(id);
     }
+
 
 }
