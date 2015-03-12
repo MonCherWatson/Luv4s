@@ -9,7 +9,7 @@ import java.util.List;
 public class Match {
     protected String id;
     protected List<World> worlds = new ArrayList<World>();
-    protected List<Map> maps = new ArrayList<Map>();
+    protected List<WvWMap> wvwMaps = new ArrayList<WvWMap>();
 
     public Match() {
 
@@ -27,7 +27,7 @@ public class Match {
         return worlds;
     }
 
-    public List<Map> getMaps() {
-        return maps;
+    public List<WvWMap> getWvwMaps() {
+        return wvwMaps;
     }
 }

@@ -11,7 +11,7 @@ public class World {
     protected Integer id;
     protected Colours colour;
     protected String name;
-    protected List<Map> maps = new ArrayList<Map>();
+    protected List<WvWMap> wvwMaps = new ArrayList<WvWMap>();
 
     public World(Integer id, Colours colour, String name) {
         this.id = id;
