@@ -1,15 +1,15 @@
 package com.auguryrock.luv4s.services;
 
+import com.auguryrock.luv4s.persistence.World;
 import com.auguryrock.luv4s.persistence.WvWMatch;
 import com.auguryrock.luv4s.persistence.WvWMatchRepository;
-import com.auguryrock.luv4s.rest.Gw2V1Client;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,11 +17,22 @@ import java.util.List;
 public class MatchServiceTest {
     @Resource
     private MatchService matchService;
+    @Resource
+    WvWMatchRepository wvWMatchRepository;
 
     @Test
+    @Transactional
     public void testGetAllMatches() throws Exception {
         final List<WvWMatch> allMatches = matchService.createMatches();
         System.out.println(allMatches);
+        for (WvWMatch match : wvWMatchRepository.findAll()) {
+            System.out.println("matchId=" + match.getId());
+            for (World world : match.getWorlds()) {
+                System.out.println("\tworldId=" + world.getId());
+
+            }
+            System.out.println("******************************");
+        }
     }
 
     @Test
