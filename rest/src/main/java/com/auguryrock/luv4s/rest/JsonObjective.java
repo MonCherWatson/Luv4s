@@ -19,6 +19,6 @@ public class JsonObjective {
     }
 
     public enum Owner {
-        Red, Green, Blue
+        Red, Green, Blue, Neutral
     }
 }

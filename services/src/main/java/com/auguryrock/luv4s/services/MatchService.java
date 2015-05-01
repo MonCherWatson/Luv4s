@@ -13,9 +13,9 @@ import java.util.Map;
 @Component
 public class MatchService {
     @Autowired
-    private Gw2V1Client gw2V1Client;
+    protected Gw2V1Client gw2V1Client;
     @Autowired
-    private Gw2V2Client gw2V2Client;
+    protected Gw2V2Client gw2V2Client;
     @Autowired
     private WvWMatchRepository matchRepository;
 

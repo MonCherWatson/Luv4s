@@ -21,7 +21,7 @@ subprojects {
         compile 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
         compile 'org.apache.derby:derby:10.11.1.1'
         testCompile 'junit:junit:4.12'
-        testCompile 'org.assertj:assertj-core:2.0.0'
+        testCompile 'org.assertj:assertj-core:3.0.0'
     }
 
     version = '1.0'
