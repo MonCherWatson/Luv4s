@@ -13,12 +13,12 @@ public class WvWMap {
     @ManyToOne
     @JoinColumn(name ="match_id")
     protected WvWMatch match;
-//    @OneToMany(cascade = CascadeType.ALL)
-//    protected Set<Structure> structures = new HashSet<>();
-//
-//    public Set<Structure> getStructures() {
-//        return structures;
-//    }
+    @OneToMany(cascade = CascadeType.ALL)
+    protected Set<Objective> objectives = new HashSet<>();
+
+    public Set<Objective> getObjectives() {
+        return objectives;
+    }
 
     public Colour getColour() {
         return colour;

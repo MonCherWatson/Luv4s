@@ -1,5 +1,9 @@
 package com.auguryrock.luv4s.services;
 
+import com.auguryrock.luv4s.persistence.ObjectiveDescription;
+import com.auguryrock.luv4s.persistence.ObjectiveDescriptionRepository;
+import com.auguryrock.luv4s.persistence.ObjectiveType;
+import com.google.common.collect.Lists;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Jose on 08/05/2015.
@@ -17,10 +24,21 @@ import javax.transaction.Transactional;
 public class ObjectiveServiceTest extends TestCase {
     @Autowired
     private ObjectiveService objectiveService;
+    @Autowired
+    private ObjectiveDescriptionRepository repository;
 
     @Test
     @Transactional
-    public void testCreateObjectives() {
-        objectiveService.createObjectives();
+    public void testCreateObjectivesDescription() {
+        objectiveService.createObjectivesDescription();
+        List<ObjectiveDescription> all = Lists.newArrayList(repository.findAll());
+        assertThat(all).hasSize(76);
+        ObjectiveDescription description = repository.findOne(1);
+        assertThat(description.getId()).isEqualTo(1);
+        assertThat(description.getType()).isEqualTo(ObjectiveType.KEEP);
+        assertThat(description.getName()).isEqualTo("Overlook");
+
+
+
     }
 }

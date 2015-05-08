@@ -25,8 +25,9 @@ public class WvWMapRepositoryTest {
     @Transactional
     public void test_crud() {
         WvWMap map = new WvWMap();
-//        final Structure structure = new Structure(1, Structure.Type.keep, map);
-//        map.getStructures().add(structure);
+        final Objective objective = new Objective();
+        objective.setMap(map);
+        map.getObjectives().add(objective);
         mapRepository.save(map);
 
         assertThat(map.getPk()).isNotNull();
@@ -36,7 +37,7 @@ public class WvWMapRepositoryTest {
 
         final WvWMap one = mapRepository.findOne(map.getPk());
         assertThat(one).isEqualTo(map);
-//        assertThat(one.getStructures()).containsOnly(structure);
+        assertThat(one.getObjectives()).hasSize(1);
 
 
     }

@@ -1,6 +1,8 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.ObjectiveRepository;
+import com.auguryrock.luv4s.persistence.ObjectiveDescription;
+import com.auguryrock.luv4s.persistence.ObjectiveDescriptionRepository;
+import com.auguryrock.luv4s.persistence.ObjectiveType;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescription;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescriptionReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +17,19 @@ import java.util.Map;
 @Component
 public class ObjectiveService {
     @Autowired
-    private ObjectiveRepository objectiveRepository;
+    private ObjectiveDescriptionRepository objectiveRepository;
     @Autowired
     private JsonObjectiveDescriptionReader objectiveDescriptionReader;
 
     @Transactional
-    public void createObjectives() {
+    public void createObjectivesDescription() {
         for (Map.Entry<String, JsonObjectiveDescription> o : objectiveDescriptionReader.getObjectiveDescriptions().entrySet()) {
-
+            ObjectiveDescription objectiveDescription = new ObjectiveDescription();
+            objectiveDescription.setId(Integer.valueOf(o.getKey()));
+            JsonObjectiveDescription value = o.getValue();
+            objectiveDescription.setName(value.getNames().get("en"));
+            objectiveDescription.setType(ObjectiveType.valueOf(value.getType().toUpperCase()));
+            objectiveRepository.save(objectiveDescription);
         }
     }
 }

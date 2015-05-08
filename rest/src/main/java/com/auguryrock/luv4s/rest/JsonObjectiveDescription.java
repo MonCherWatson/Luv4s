@@ -18,4 +18,15 @@ public class JsonObjectiveDescription {
     @JsonProperty(value = "name")
     private Map<String, String> names;
 
+    public String getScore() {
+        return score;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Map<String, String> getNames() {
+        return names;
+    }
 }

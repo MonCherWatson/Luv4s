@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
 
 @Component
 public class MatchService {
@@ -47,7 +46,7 @@ public class MatchService {
                 WvWMap map = createOrUpdateMap(jsonMap, match);
                 if (map != null) {
                     for (JsonObjective jsonObjective : jsonMap.getJsonObjectives()) {
-                        createOrUpdateStructure(jsonObjective);
+                        createOrUpdateObjective(jsonObjective);
                     }
                 }
             }
@@ -56,7 +55,7 @@ public class MatchService {
         return matches;
     }
 
-    protected void createOrUpdateStructure(JsonObjective jsonObjective) {
+    protected void createOrUpdateObjective(JsonObjective jsonObjective) {
 
     }
 

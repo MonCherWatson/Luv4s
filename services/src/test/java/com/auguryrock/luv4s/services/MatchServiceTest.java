@@ -58,7 +58,7 @@ public class MatchServiceTest {
 
         WvWMap greenMap = match.getWvwMaps().get(Colour.Green);
 
-//        assertThat(greenMap.getStructures()).hasSize(3);
+//        assertThat(greenMap.getObjectives()).hasSize(3);
 
 
     }
