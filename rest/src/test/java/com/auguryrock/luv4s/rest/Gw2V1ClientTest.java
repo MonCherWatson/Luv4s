@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.rest;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-rest.xml"})
@@ -25,7 +28,9 @@ public class Gw2V1ClientTest {
     public void testGetMatchDetails() throws Exception {
         // https://api.guildwars2.com/v1/wvw/match_details.json
         final String id = gw2V1Client.getAllMatches().getJsonMatches().get(0).getId();
-        gw2V1Client.getMatchDetails(id);
+        JsonMatchDetails matchDetails = gw2V1Client.getMatchDetails(id);
+        assertThat(matchDetails.getMaps()).isNotNull().hasSize(4);
+        assertThat(matchDetails.getScores()).isNotNull().hasSize(3);
     }
 
 

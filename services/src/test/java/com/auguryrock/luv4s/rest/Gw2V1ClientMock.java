@@ -17,6 +17,6 @@ public class Gw2V1ClientMock extends AbstractMockRestClient implements Gw2V1Clie
 
     @Override
     public JsonMatchDetails getMatchDetails(@QueryParam("match_id") String matchId) {
-        return unmarshall("test-match_details.json", JsonMatchDetails.class);
+        return unmarshall("/test-match_details.json", JsonMatchDetails.class);
     }
 }

@@ -1,9 +1,6 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.Colour;
-import com.auguryrock.luv4s.persistence.World;
-import com.auguryrock.luv4s.persistence.WvWMatch;
-import com.auguryrock.luv4s.persistence.WvWMatchRepository;
+import com.auguryrock.luv4s.persistence.*;
 import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
 import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
 import org.junit.Before;
@@ -44,7 +41,7 @@ public class MatchServiceTest {
         assertThat(wvWMatch.getId()).isEqualTo("2-3");
         assertThat(wvWMatch.getWorlds()).hasSize(3);
 
-        World world = wvWMatch.getWorlds().iterator().next();
+        World world = wvWMatch.getWorlds().get(Colour.Red);
         assertThat(world.getColour()).isEqualTo(Colour.Red);
         assertThat(world.getId()).isEqualTo(2103);
 
@@ -54,8 +51,15 @@ public class MatchServiceTest {
     @Transactional
     public void testCreateOrUpdateObjectives() {
         matchService.createMatches();
-        List<WvWMatch> matches = matchService.createOrUpdateObjectives();
+        List<WvWMatch> matches = matchService.createOrUpdateMaps();
         WvWMatch match = matches.get(0);
+        assertThat(match.getId()).isEqualTo("2-3");
+        assertThat(match.getWvwMaps()).hasSize(3).containsKeys(Colour.Blue, Colour.Red, Colour.Green);
+
+        WvWMap greenMap = match.getWvwMaps().get(Colour.Green);
+
+//        assertThat(greenMap.getStructures()).hasSize(3);
+
 
     }
 

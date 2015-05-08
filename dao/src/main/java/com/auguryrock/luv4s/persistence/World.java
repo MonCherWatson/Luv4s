@@ -1,15 +1,13 @@
 package com.auguryrock.luv4s.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 public class World implements Comparable<World>{
     @Id
     protected Integer id;
     @ManyToOne
+    @JoinColumn(name ="match_id")
     protected WvWMatch match;
     protected Colour colour;
     protected Integer score;
@@ -85,4 +83,7 @@ public class World implements Comparable<World>{
     public void setScore(Integer score) {
         this.score = score;
     }
+
+
+
 }

@@ -7,9 +7,10 @@ import java.util.*;
 public class WvWMatch {
     @Id
     protected String id;
-    @OneToMany(cascade = CascadeType.ALL)
-    protected SortedSet<World> worlds = new TreeSet<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
+    @MapKey(name = "colour")
+    protected Map<Colour, World> worlds = new HashMap<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
     @MapKey(name = "colour")
     protected Map<Colour, WvWMap> wvwMaps = new HashMap<>();
 
@@ -26,7 +27,7 @@ public class WvWMatch {
         return id;
     }
 
-    public SortedSet<World> getWorlds() {
+    public Map<Colour, World> getWorlds() {
         return worlds;
     }
 
@@ -36,5 +37,17 @@ public class WvWMatch {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    public void addWorld(World world) {
+        assert world.getColour() != null;
+        worlds.put(world.getColour(), world);
+        world.setMatch(this);
+    }
+
+    public void addMaps(WvWMap map) {
+        assert map.getColour() != null;
+        wvwMaps.put(map.getColour(), map);
+        map.setMatch(this);
     }
 }

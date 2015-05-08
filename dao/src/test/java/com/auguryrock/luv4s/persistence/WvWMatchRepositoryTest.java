@@ -19,6 +19,8 @@ public class WvWMatchRepositoryTest {
     WvWMatchRepository wvwMatchRepository;
     @PersistenceContext
     EntityManager entityManager;
+    @Autowired
+    WorldRepository worldRepository;
 
 
     @Test
@@ -30,16 +32,20 @@ public class WvWMatchRepositoryTest {
         World world2 = new World(2, Colour.Red);
         World world3 = new World(3, Colour.Green);
 
-        match.getWorlds().add(world1);
-        match.getWorlds().add(world2);
-        match.getWorlds().add(world3);
+        match.addWorld(world1);
+        match.addWorld(world2);
+        match.addWorld(world3);
         wvwMatchRepository.save(match);
 
         entityManager.flush();
         entityManager.clear();
 
+        Iterable<World> all = worldRepository.findAll();
+        assertThat(all).hasSize(3);
+        assertThat(all.iterator().next().getMatch()).isNotNull();
+
         final WvWMatch match1 = wvwMatchRepository.findOne("matchId");
         assertThat(match1).isNotNull();
-        assertThat(match1.getWorlds()).hasSize(3).containsOnly(world3, world2, world1);
+        assertThat(match1.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Green, Colour.Red).containsValues(world3, world2, world1);
     }
 }

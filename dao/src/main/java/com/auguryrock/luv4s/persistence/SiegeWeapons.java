@@ -6,6 +6,6 @@ public class SiegeWeapons {
     protected Date lastResetStartTime;
     protected Date nextResetStartTime;
     protected int number;
-    protected Structure structure;
+//    protected Structure structure;
     protected String description;
 }

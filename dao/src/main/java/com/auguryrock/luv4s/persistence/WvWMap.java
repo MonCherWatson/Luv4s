@@ -9,14 +9,16 @@ public class WvWMap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer pk;
-
     protected Colour colour;
-    @OneToMany(cascade = CascadeType.ALL)
-    protected Set<Structure> structures = new HashSet<>();
-
-    public Set<Structure> getStructures() {
-        return structures;
-    }
+    @ManyToOne
+    @JoinColumn(name ="match_id")
+    protected WvWMatch match;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    protected Set<Structure> structures = new HashSet<>();
+//
+//    public Set<Structure> getStructures() {
+//        return structures;
+//    }
 
     public Colour getColour() {
         return colour;
@@ -57,4 +59,7 @@ public class WvWMap {
         return result;
     }
 
+    public void setMatch(WvWMatch match) {
+        this.match = match;
+    }
 }

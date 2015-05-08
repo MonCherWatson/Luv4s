@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.rest;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,7 +20,7 @@ public class JsonObjectiveDescriptionReaderTest {
 
     @Test
     public void testGetObjectiveDescriptions() throws Exception {
-        final Map descriptions = reader.getObjectiveDescriptions();
-        System.out.println(descriptions);
+        Map<String, JsonObjectiveDescription> objectiveDescriptions = reader.getObjectiveDescriptions();
+        assertThat(objectiveDescriptions).hasSize(76);
     }
 }
