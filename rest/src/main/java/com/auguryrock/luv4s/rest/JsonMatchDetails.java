@@ -11,8 +11,14 @@ public class JsonMatchDetails {
     protected String matchId;
     @JsonProperty("maps")
     protected List<JsonMap> maps;
+    @JsonProperty("scores")
+    protected List<Integer> scores;
 
     public List<JsonMap> getMaps() {
         return maps;
+    }
+
+    public List<Integer> getScores() {
+        return scores;
     }
 }

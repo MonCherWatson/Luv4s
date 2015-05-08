@@ -1,6 +1,5 @@
 package com.auguryrock.luv4s.persistence;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,9 @@ public class WvWMatchRepositoryTest {
     public void test_crud() {
         final WvWMatch match = new WvWMatch("matchId");
 
-        World world1 = new World(1, Colours.Blue);
-        World world2 = new World(2, Colours.Red);
-        World world3 = new World(3, Colours.Green);
+        World world1 = new World(1, Colour.Blue);
+        World world2 = new World(2, Colour.Red);
+        World world3 = new World(3, Colour.Green);
 
         match.getWorlds().add(world1);
         match.getWorlds().add(world2);

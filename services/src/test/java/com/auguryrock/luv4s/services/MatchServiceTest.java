@@ -1,12 +1,11 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.Colours;
+import com.auguryrock.luv4s.persistence.Colour;
 import com.auguryrock.luv4s.persistence.World;
 import com.auguryrock.luv4s.persistence.WvWMatch;
 import com.auguryrock.luv4s.persistence.WvWMatchRepository;
 import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
 import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,18 +45,18 @@ public class MatchServiceTest {
         assertThat(wvWMatch.getWorlds()).hasSize(3);
 
         World world = wvWMatch.getWorlds().iterator().next();
-        assertThat(world.getColour()).isEqualTo(Colours.Blue);
-        assertThat(world.getId()).isEqualTo(Colours.Blue);
+        assertThat(world.getColour()).isEqualTo(Colour.Red);
+        assertThat(world.getId()).isEqualTo(2103);
 
-//        System.out.println(allMatches);
-//        for (WvWMatch match : wvWMatchRepository.findAll()) {
-//            System.out.println("matchId=" + match.getId());
-//            for (World world : match.getWorlds()) {
-//                System.out.println("\tworldId=" + world.getId());
-//
-//            }
-//            System.out.println("******************************");
-//        }
+    }
+
+    @Test
+    @Transactional
+    public void testCreateOrUpdateObjectives() {
+        matchService.createMatches();
+        List<WvWMatch> matches = matchService.createOrUpdateObjectives();
+        WvWMatch match = matches.get(0);
+
     }
 
     @Test

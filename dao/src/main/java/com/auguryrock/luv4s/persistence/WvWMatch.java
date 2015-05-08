@@ -1,19 +1,19 @@
 package com.auguryrock.luv4s.persistence;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class WvWMatch {
     @Id
     protected String id;
     @OneToMany(cascade = CascadeType.ALL)
-    protected Set<World> worlds = new HashSet<>();
-    @Transient
-    protected List<WvWMap> wvwMaps = new ArrayList<WvWMap>();
+    protected SortedSet<World> worlds = new TreeSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @MapKey(name = "colour")
+    protected Map<Colour, WvWMap> wvwMaps = new HashMap<>();
+
+    protected Zone zone;
 
     public WvWMatch(String id) {
         this.id = id;
@@ -26,11 +26,15 @@ public class WvWMatch {
         return id;
     }
 
-    public Set<World> getWorlds() {
+    public SortedSet<World> getWorlds() {
         return worlds;
     }
 
-    public List<WvWMap> getWvwMaps() {
+    public Map<Colour, WvWMap> getWvwMaps() {
         return wvwMaps;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }

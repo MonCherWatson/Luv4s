@@ -20,14 +20,14 @@ public class WorldRepositoryTest {
     @Test
     @Transactional
     public void testCrud() {
-        World world = new World(1, Colours.Blue);
+        World world = new World(1, Colour.Blue);
         worldRepository.save(world);
 
         final World one = worldRepository.findOne(1);
 
         assertThat(one).isNotNull();
         assertThat(one.getId()).isEqualTo(1);
-        assertThat(one.getColour()).isEqualTo(Colours.Blue);
+        assertThat(one.getColour()).isEqualTo(Colour.Blue);
     }
 
     @AfterTransaction

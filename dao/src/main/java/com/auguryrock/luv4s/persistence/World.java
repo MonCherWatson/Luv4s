@@ -6,16 +6,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class World {
+public class World implements Comparable<World>{
     @Id
     protected Integer id;
     @ManyToOne
     protected WvWMatch match;
-    protected Colours colour;
+    protected Colour colour;
+    protected Integer score;
     @Transient
     protected String name;
 
-    public World(Integer id, Colours colour) {
+    public World(Integer id, Colour colour) {
         this.id = id;
         this.colour = colour;
     }
@@ -27,7 +28,7 @@ public class World {
         return id;
     }
 
-    public Colours getColour() {
+    public Colour getColour() {
         return colour;
     }
 
@@ -67,5 +68,21 @@ public class World {
         result = 31 * result + (colour != null ? colour.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+
+    @Override
+    public int compareTo(World world) {
+        assert world.getId() != null;
+        assert id != null;
+        return id.compareTo(world.getId());
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }

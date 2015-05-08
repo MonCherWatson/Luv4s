@@ -8,15 +8,19 @@ import java.util.List;
 @JsonIgnoreProperties({"scores", "bonuses"})
 public class JsonMap {
     @JsonProperty("type")
-    protected String type;
+    protected Type type;
     @JsonProperty("objectives")
     protected List<JsonObjective> jsonObjectives;
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
     public List<JsonObjective> getJsonObjectives() {
         return jsonObjectives;
+    }
+
+    public static enum Type {
+        RedHome, GreenHome, BlueHome, Center
     }
 }
