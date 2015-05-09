@@ -1,4 +1,4 @@
-package com.auguryrock.luv4s.services.rest;
+package com.auguryrock.luv4s.services;
 
 import com.auguryrock.luv4s.persistence.Match;
 import com.auguryrock.luv4s.services.MatchService;
@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import java.util.List;
 
 @Path("/")
-public class MatchRestService {
+public class RestService {
     @Autowired
     private MatchService matchService;
 

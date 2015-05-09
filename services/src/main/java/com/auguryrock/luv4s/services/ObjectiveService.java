@@ -26,6 +26,9 @@ public class ObjectiveService {
 
     @Transactional
     public void createObjectivesDescription() {
+        if (objectiveRepository.count() != 0) {
+            return;
+        }
         for (Map.Entry<String, JsonObjectiveDescription> o : objectiveDescriptionReader.getObjectiveDescriptions().entrySet()) {
             ObjectiveDescription objectiveDescription = new ObjectiveDescription();
             objectiveDescription.setId(Integer.valueOf(o.getKey()));

@@ -29,6 +29,7 @@ subprojects {
 
         testCompile 'junit:junit:4.12'
         testCompile 'org.assertj:assertj-core:3.0.0'
+        testCompile 'org.apache.cxf:cxf-rt-transports-http-jetty:3.0.3'
     }
 
     version = '1.0'
