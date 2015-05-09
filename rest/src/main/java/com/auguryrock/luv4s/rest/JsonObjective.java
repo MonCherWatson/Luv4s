@@ -6,19 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties({"owner_guild", "bonuses"})
 public class JsonObjective {
     @JsonProperty("id")
-    protected String id;
+    protected Integer id;
     @JsonProperty("owner")
-    protected Owner owner;
+    protected String owner;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Owner getOwner() {
+    public String getOwner() {
         return owner;
-    }
-
-    public enum Owner {
-        Red, Green, Blue, Neutral
     }
 }

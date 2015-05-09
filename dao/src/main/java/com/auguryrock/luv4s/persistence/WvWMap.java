@@ -3,6 +3,7 @@ package com.auguryrock.luv4s.persistence;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 public class WvWMap {
@@ -14,7 +15,7 @@ public class WvWMap {
     @JoinColumn(name ="match_id")
     protected WvWMatch match;
     @OneToMany(cascade = CascadeType.ALL)
-    protected Set<Objective> objectives = new HashSet<>();
+    protected Set<Objective> objectives = new TreeSet<>();
 
     public Set<Objective> getObjectives() {
         return objectives;
@@ -61,5 +62,14 @@ public class WvWMap {
 
     public void setMatch(WvWMatch match) {
         this.match = match;
+    }
+
+    public WvWMatch getMatch() {
+        return match;
+    }
+
+    public void addOjective(Objective objective) {
+        objectives.add(objective);
+        objective.setMap(this);
     }
 }

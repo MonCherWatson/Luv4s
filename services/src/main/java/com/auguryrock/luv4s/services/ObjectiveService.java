@@ -1,8 +1,7 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.ObjectiveDescription;
-import com.auguryrock.luv4s.persistence.ObjectiveDescriptionRepository;
-import com.auguryrock.luv4s.persistence.ObjectiveType;
+import com.auguryrock.luv4s.persistence.*;
+import com.auguryrock.luv4s.rest.JsonObjective;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescription;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescriptionReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,13 @@ import java.util.Map;
 @Component
 public class ObjectiveService {
     @Autowired
-    private ObjectiveDescriptionRepository objectiveRepository;
+    private ObjectiveDescriptionRepository objectiveDescriptionRepository;
     @Autowired
     private JsonObjectiveDescriptionReader objectiveDescriptionReader;
+    @Autowired
+    private WorldRepository worldRepository;
+    @Autowired
+    private ObjectiveRepository objectiveRepository;
 
     @Transactional
     public void createObjectivesDescription() {
@@ -29,7 +32,33 @@ public class ObjectiveService {
             JsonObjectiveDescription value = o.getValue();
             objectiveDescription.setName(value.getNames().get("en"));
             objectiveDescription.setType(ObjectiveType.valueOf(value.getType().toUpperCase()));
-            objectiveRepository.save(objectiveDescription);
+            objectiveDescriptionRepository.save(objectiveDescription);
         }
     }
+
+    @Transactional
+    public void createOrUpdateObjective(JsonObjective jsonObjective, WvWMap map) {
+        Objective objective = findObjectiveInSet(map, jsonObjective.getId());
+        if (objective == null) {
+            objective = new Objective();
+            ObjectiveDescription description = objectiveDescriptionRepository.findOne(jsonObjective.getId());
+            objective.setDescription(description);
+            objectiveRepository.save(objective);
+            map.addOjective(objective);
+        }
+        Colour colour = Colour.valueOf(jsonObjective.getOwner());
+        World world = map.getMatch().getWorlds().get(colour);
+        objective.setOwner(world);
+    }
+
+    protected Objective findObjectiveInSet(WvWMap map, Integer descriptionId) {
+        assert descriptionId != null;
+        for (Objective objective : map.getObjectives()) {
+            if (objective.getDescription().getId().equals(descriptionId)) {
+                return objective;
+            }
+        }
+        return null;
+    }
+
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Jose on 08/05/2015.
  */
 @Entity
-public class Objective {
+public class Objective implements Comparable<Objective>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer pk;
@@ -39,5 +39,26 @@ public class Objective {
 
     public void setOwner(World owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public int compareTo(Objective o) {
+        return pk.compareTo(o.pk);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Objective objective = (Objective) o;
+
+        return pk.equals(objective.pk);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return pk.hashCode();
     }
 }

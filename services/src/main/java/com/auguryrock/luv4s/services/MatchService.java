@@ -18,6 +18,8 @@ public class MatchService {
     private WvWMatchRepository matchRepository;
     @Autowired
     private WvWMapRepository mapRepository;
+    @Autowired
+    private ObjectiveService objectiveService;
 
     public List<WvWMatch> createMatches() {
         final ArrayList<WvWMatch> matches = new ArrayList<>();
@@ -26,7 +28,7 @@ public class MatchService {
             match.getWorlds().put(Colour.Blue, new World(gw2Match.getBlueWorldId(), Colour.Blue));
             match.getWorlds().put(Colour.Green, new World(gw2Match.getGreenWorldId(), Colour.Green));
             match.getWorlds().put(Colour.Red, new World(gw2Match.getRedWorldId(), Colour.Red));
-            if(gw2Match.getId().startsWith("2")) {
+            if (gw2Match.getId().startsWith("2")) {
                 match.setZone(Zone.EU);
             } else {
                 match.setZone(Zone.US);
@@ -46,7 +48,7 @@ public class MatchService {
                 WvWMap map = createOrUpdateMap(jsonMap, match);
                 if (map != null) {
                     for (JsonObjective jsonObjective : jsonMap.getJsonObjectives()) {
-                        createOrUpdateObjective(jsonObjective);
+                        objectiveService.createOrUpdateObjective(jsonObjective, map);
                     }
                 }
             }
@@ -55,21 +57,15 @@ public class MatchService {
         return matches;
     }
 
-    protected void createOrUpdateObjective(JsonObjective jsonObjective) {
-
-    }
 
     protected WvWMap createOrUpdateMap(JsonMap jsonMap, WvWMatch match) {
         Colour mapColour = convertMapTypeColour(jsonMap.getType());
-        if (mapColour != null) {
-            WvWMap wvwWMap = match.getWvwMaps().get(mapColour);
-            if (wvwWMap == null) {
-                wvwWMap = new WvWMap(mapColour);
-                match.addMaps(wvwWMap);
-            }
-            return wvwWMap;
+        WvWMap wvwWMap = match.getWvwMaps().get(mapColour);
+        if (wvwWMap == null) {
+            wvwWMap = new WvWMap(mapColour);
+            match.addMaps(wvwWMap);
         }
-        return null;
+        return wvwWMap;
     }
 
     protected Colour convertMapTypeColour(JsonMap.Type mapType) {
@@ -80,8 +76,10 @@ public class MatchService {
                 return Colour.Green;
             case BlueHome:
                 return Colour.Blue;
+            case Center:
+                return Colour.Neutral;
             default:
-                return null;
+                throw new RuntimeException("Unknown map type: " + mapType);
         }
     }
 
