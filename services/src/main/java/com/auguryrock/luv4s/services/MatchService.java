@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Component
@@ -15,16 +16,16 @@ public class MatchService {
     @Autowired
     protected Gw2V2Client gw2V2Client;
     @Autowired
-    private WvWMatchRepository matchRepository;
+    private MatchRepository matchRepository;
     @Autowired
     private WvWMapRepository mapRepository;
     @Autowired
     private ObjectiveService objectiveService;
 
-    public List<WvWMatch> createMatches() {
-        final ArrayList<WvWMatch> matches = new ArrayList<>();
+    public List<Match> createMatches() {
+        final ArrayList<Match> matches = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
-            WvWMatch match = new WvWMatch(gw2Match.getId());
+            Match match = new Match(gw2Match.getId());
             match.getWorlds().put(Colour.Blue, new World(gw2Match.getBlueWorldId(), Colour.Blue));
             match.getWorlds().put(Colour.Green, new World(gw2Match.getGreenWorldId(), Colour.Green));
             match.getWorlds().put(Colour.Red, new World(gw2Match.getRedWorldId(), Colour.Red));
@@ -39,9 +40,9 @@ public class MatchService {
         return matches;
     }
 
-    public List<WvWMatch> createOrUpdateMaps() {
-        List<WvWMatch> matches = Lists.newArrayList(matchRepository.findAll());
-        for (WvWMatch match : matches) {
+    public List<Match> createOrUpdateMaps() {
+        List<Match> matches = Lists.newArrayList(matchRepository.findAll());
+        for (Match match : matches) {
             JsonMatchDetails matchDetails = gw2V1Client.getMatchDetails(match.getId());
             updateScores(matchDetails.getScores(), match.getWorlds());
             for (JsonMap jsonMap : matchDetails.getMaps()) {
@@ -58,7 +59,7 @@ public class MatchService {
     }
 
 
-    protected WvWMap createOrUpdateMap(JsonMap jsonMap, WvWMatch match) {
+    protected WvWMap createOrUpdateMap(JsonMap jsonMap, Match match) {
         Colour mapColour = convertMapTypeColour(jsonMap.getType());
         WvWMap wvwWMap = match.getWvwMaps().get(mapColour);
         if (wvwWMap == null) {
@@ -98,5 +99,9 @@ public class MatchService {
         return map;
     }
 
+    @Transactional
+    public List<Match> getCurrentMatches() {
+        return Lists.newArrayList(matchRepository.findAll());
 
+    }
 }

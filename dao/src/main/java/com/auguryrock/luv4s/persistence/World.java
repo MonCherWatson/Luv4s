@@ -8,7 +8,7 @@ public class World implements Comparable<World>{
     protected Integer id;
     @ManyToOne
     @JoinColumn(name ="match_id")
-    protected WvWMatch match;
+    protected Match match;
     protected Colour colour;
     protected Integer score;
     @Transient
@@ -34,11 +34,11 @@ public class World implements Comparable<World>{
         return name;
     }
 
-    public WvWMatch getMatch() {
+    public Match getMatch() {
         return match;
     }
 
-    public void setMatch(WvWMatch match) {
+    public void setMatch(Match match) {
         this.match = match;
     }
 

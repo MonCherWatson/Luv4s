@@ -1,7 +1,6 @@
 package com.auguryrock.luv4s.persistence;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -13,7 +12,7 @@ public class WvWMap {
     protected Colour colour;
     @ManyToOne
     @JoinColumn(name ="match_id")
-    protected WvWMatch match;
+    protected Match match;
     @OneToMany(cascade = CascadeType.ALL)
     protected Set<Objective> objectives = new TreeSet<>();
 
@@ -60,11 +59,11 @@ public class WvWMap {
         return result;
     }
 
-    public void setMatch(WvWMatch match) {
+    public void setMatch(Match match) {
         this.match = match;
     }
 
-    public WvWMatch getMatch() {
+    public Match getMatch() {
         return match;
     }
 

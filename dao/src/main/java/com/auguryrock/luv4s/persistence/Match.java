@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class WvWMatch {
+public class Match {
     @Id
     protected String id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
@@ -16,11 +16,11 @@ public class WvWMatch {
 
     protected Zone zone;
 
-    public WvWMatch(String id) {
+    public Match(String id) {
         this.id = id;
     }
 
-    public WvWMatch(){
+    public Match(){
     }
 
     public String getId() {

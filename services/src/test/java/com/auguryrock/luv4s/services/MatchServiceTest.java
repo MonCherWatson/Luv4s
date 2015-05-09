@@ -23,7 +23,7 @@ public class MatchServiceTest {
     @Resource
     private MatchService matchService;
     @Resource
-    private WvWMatchRepository wvWMatchRepository;
+    private MatchRepository matchRepository;
     @Resource
     private ObjectiveService objectiveService;
 
@@ -37,11 +37,11 @@ public class MatchServiceTest {
     @Test
     @Transactional
     public void testGetAllMatches() throws Exception {
-        final List<WvWMatch> allMatches = matchService.createMatches();
+        final List<Match> allMatches = matchService.createMatches();
 
         assertThat(allMatches).hasSize(17);
 
-        WvWMatch match = allMatches.get(0);
+        Match match = allMatches.get(0);
         assertThat(match.getId()).isEqualTo("2-3");
         checkWorlds(match);
 
@@ -59,7 +59,7 @@ public class MatchServiceTest {
 
         matchService.createOrUpdateMaps();
 
-        WvWMatch match = wvWMatchRepository.findOne("2-3");
+        Match match = matchRepository.findOne("2-3");
         checkWorlds(match);
 
         assertThat(match.getWvwMaps()).hasSize(4);
@@ -81,7 +81,7 @@ public class MatchServiceTest {
         assertThat(objective.getDescription().getId()).isEqualTo(75);
     }
 
-    protected void checkWorlds(WvWMatch match) {
+    protected void checkWorlds(Match match) {
         assertThat(match.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Red, Colour.Green);
 
         World world = match.getWorlds().get(Colour.Red);

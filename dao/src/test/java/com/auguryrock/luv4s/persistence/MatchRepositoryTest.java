@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-derby.xml"})
-public class WvWMatchRepositoryTest {
+public class MatchRepositoryTest {
     @Autowired
-    WvWMatchRepository wvwMatchRepository;
+    MatchRepository matchRepository;
     @PersistenceContext
     EntityManager entityManager;
     @Autowired
@@ -26,7 +26,7 @@ public class WvWMatchRepositoryTest {
     @Test
     @Transactional
     public void test_crud() {
-        final WvWMatch match = new WvWMatch("matchId");
+        final Match match = new Match("matchId");
 
         World world1 = new World(1, Colour.Blue);
         World world2 = new World(2, Colour.Red);
@@ -35,7 +35,7 @@ public class WvWMatchRepositoryTest {
         match.addWorld(world1);
         match.addWorld(world2);
         match.addWorld(world3);
-        wvwMatchRepository.save(match);
+        matchRepository.save(match);
 
         entityManager.flush();
         entityManager.clear();
@@ -44,7 +44,7 @@ public class WvWMatchRepositoryTest {
         assertThat(all).hasSize(3);
         assertThat(all.iterator().next().getMatch()).isNotNull();
 
-        final WvWMatch match1 = wvwMatchRepository.findOne("matchId");
+        final Match match1 = matchRepository.findOne("matchId");
         assertThat(match1).isNotNull();
         assertThat(match1.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Green, Colour.Red).containsValues(world3, world2, world1);
     }

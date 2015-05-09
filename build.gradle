@@ -21,6 +21,12 @@ subprojects {
         compile 'org.hibernate:hibernate-entitymanager:4.3.9.Final'
         compile 'org.apache.derby:derby:10.11.1.1'
         compile 'com.google.guava:guava:18.0'
+        compile group: 'org.apache.cxf', name: 'cxf-rt-rs-client', version: '3.0.3'
+        compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.0.3'
+        compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxrs', version: '3.0.3'
+        compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
+
         testCompile 'junit:junit:4.12'
         testCompile 'org.assertj:assertj-core:3.0.0'
     }
