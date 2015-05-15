@@ -12,10 +12,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -29,20 +26,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by Jose on 08/05/2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {TestContextConfiguration.class})
-public class ObjectiveServiceTest extends TestCase {
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestContextConfiguration.class)
+public class ObjectiveServiceTest  {
 
 //    @Configuration
-//    @ComponentScan(basePackages = {"com.auguryrock.luv4s"})
+//    @ComponentScan(basePackages = {"com.auguryrock.luv4s"}, excludeFilters=@ComponentScan.Filter(type = FilterType.ANNOTATION, value=Configuration.class))
 //    @ImportResource("/applicationContext-derby.xml")
 //    public static class TestContextConfiguration {
 //        @Bean
-//        Gw2V1Client gw2V1Client() {
+//        public Gw2V1Client gw2V1Client() {
 //            return new Gw2V1ClientMock();
 //        }
 //
 //        @Bean
-//        Gw2V2Client gw2V2Client() {
+//        public Gw2V2Client gw2V2Client() {
 //            return new Gw2V2ClientMock();
 //        }
 //    }
