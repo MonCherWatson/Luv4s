@@ -4,6 +4,9 @@ import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.rest.JsonObjective;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescription;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescriptionReader;
+import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +18,8 @@ import java.util.Map;
  */
 @Component
 public class ObjectiveService {
+    final static Logger logger = LoggerFactory.getLogger(ObjectiveService.class);
+
     @Autowired
     private ObjectiveDescriptionRepository objectiveDescriptionRepository;
     @Autowired
@@ -26,6 +31,7 @@ public class ObjectiveService {
 
     @Transactional
     public void createObjectivesDescription() {
+
         if (objectiveRepository.count() != 0) {
             return;
         }
@@ -37,6 +43,7 @@ public class ObjectiveService {
             objectiveDescription.setType(ObjectiveType.valueOf(value.getType().toUpperCase()));
             objectiveDescriptionRepository.save(objectiveDescription);
         }
+        logger.info(objectiveDescriptionRepository.count()+ " Objective Descriptions have been saved.");
     }
 
     @Transactional

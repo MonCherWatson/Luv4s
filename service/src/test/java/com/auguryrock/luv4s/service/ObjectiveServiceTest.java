@@ -29,22 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestContextConfiguration.class)
 public class ObjectiveServiceTest  {
 
-//    @Configuration
-//    @ComponentScan(basePackages = {"com.auguryrock.luv4s"}, excludeFilters=@ComponentScan.Filter(type = FilterType.ANNOTATION, value=Configuration.class))
-//    @ImportResource("/applicationContext-derby.xml")
-//    public static class TestContextConfiguration {
-//        @Bean
-//        public Gw2V1Client gw2V1Client() {
-//            return new Gw2V1ClientMock();
-//        }
-//
-//        @Bean
-//        public Gw2V2Client gw2V2Client() {
-//            return new Gw2V2ClientMock();
-//        }
-//    }
-
-
     @Autowired
     private ObjectiveService objectiveService;
     @Autowired

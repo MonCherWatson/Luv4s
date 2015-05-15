@@ -3,6 +3,8 @@ package com.auguryrock.luv4s.service;
 import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.*;
 
 @Component
 public class MatchService {
+    final static Logger logger = LoggerFactory.getLogger(MatchService.class);
+
     @Resource(name = "gw2V1Client")
     protected Gw2V1Client gw2V1Client;
     @Resource(name = "gw2V2Client")
@@ -38,6 +42,7 @@ public class MatchService {
             matchup = matchupRepository.save(matchup);
             matchups.add(matchup);
         }
+        logger.info(matchupRepository.count() + " matchups have been created.");
         return matchups;
     }
 
