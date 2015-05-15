@@ -1,7 +1,7 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
-import com.auguryrock.luv4s.service.MatchService;
+import com.auguryrock.luv4s.service.MatchupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Component
 public class RestService {
     @Autowired
-    private MatchService matchService;
+    private MatchupService matchupService;
 
 
     @Path("/matches")
@@ -26,11 +26,11 @@ public class RestService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Matchup> getCurrentMatches() {
-        List<Matchup> currentMatches = matchService.getCurrentMatches();
+        List<Matchup> currentMatches = matchupService.getCurrentMatches();
         return currentMatches;
     }
 
-    public void setMatchService(MatchService matchService) {
-        this.matchService = matchService;
+    public void setMatchupService(MatchupService matchupService) {
+        this.matchupService = matchupService;
     }
 }

@@ -1,15 +1,9 @@
 package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.*;
-import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -27,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MatchupServiceTest {
 
     @Resource
-    private MatchService matchService;
+    private MatchupService matchupService;
     @Resource
     private MatchupRepository matchupRepository;
     @Resource
@@ -35,27 +29,31 @@ public class MatchupServiceTest {
 
 
     @Test
-    public void testGetAllMatches() throws Exception {
-        final List<Matchup> allMatchups = matchService.createMatches();
+    public void testCreateMatches() throws Exception {
+        final List<Matchup> allMatchups = matchupService.createMatches();
 
         assertThat(allMatchups).hasSize(17);
 
         Matchup matchup = allMatchups.get(0);
         assertThat(matchup.getId()).isEqualTo("2-3");
         checkWorlds(matchup);
-
         assertThat(matchup.getWvwMaps()).isEmpty();
 
+        List<Matchup> matchups = Lists.newArrayList(matchupRepository.findAll());
+
+        Matchup one = matchupRepository.findOne(matchup.getId());
+        checkWorlds(one);
+        assertThat(matchup.getWvwMaps()).isEmpty();
     }
 
     @Test
     public void testCreateOrUpdateObjectives() {
         //prerequisites
-        matchService.createMatches();
+        matchupService.createMatches();
         objectiveService.createObjectivesDescription();
         /////////////////
 
-        matchService.createOrUpdateMaps();
+        matchupService.createOrUpdateMaps();
 
         Matchup matchup = matchupRepository.findOne("2-3");
         checkWorlds(matchup);

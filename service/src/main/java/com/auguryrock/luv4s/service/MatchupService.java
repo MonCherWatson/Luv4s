@@ -13,8 +13,8 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Component
-public class MatchService {
-    final static Logger logger = LoggerFactory.getLogger(MatchService.class);
+public class MatchupService {
+    final static Logger logger = LoggerFactory.getLogger(MatchupService.class);
 
     @Resource(name = "gw2V1Client")
     protected Gw2V1Client gw2V1Client;
@@ -31,9 +31,9 @@ public class MatchService {
         final ArrayList<Matchup> matchups = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
             Matchup matchup = new Matchup(gw2Match.getId());
-            matchup.getWorlds().put(Colour.Blue, new World(gw2Match.getBlueWorldId(), Colour.Blue));
-            matchup.getWorlds().put(Colour.Green, new World(gw2Match.getGreenWorldId(), Colour.Green));
-            matchup.getWorlds().put(Colour.Red, new World(gw2Match.getRedWorldId(), Colour.Red));
+            matchup.addWorld(new World(gw2Match.getBlueWorldId(), Colour.Blue));
+            matchup.addWorld(new World(gw2Match.getGreenWorldId(), Colour.Green));
+            matchup.addWorld(new World(gw2Match.getRedWorldId(), Colour.Red));
             if (gw2Match.getId().startsWith("2")) {
                 matchup.setZone(Zone.EU);
             } else {

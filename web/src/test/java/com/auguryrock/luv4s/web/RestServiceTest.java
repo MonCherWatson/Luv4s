@@ -1,7 +1,7 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
-import com.auguryrock.luv4s.service.MatchService;
+import com.auguryrock.luv4s.service.MatchupService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import mockit.Expectations;
@@ -28,18 +28,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RestServiceTest extends JAXRSTest<RestService> {
     private RestService restService = new RestService();
     @Mocked
-    private MatchService matchService;
+    private MatchupService matchupService;
 
     @Before
     public void init() {
-        restService.setMatchService(matchService);
+        restService.setMatchupService(matchupService);
         initWebServices();
     }
 
     @Test
     public void test() throws JsonProcessingException {
         new Expectations() {{
-            matchService.getCurrentMatches();
+            matchupService.getCurrentMatches();
             result = new Matchup();
         }};
 
@@ -50,7 +50,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
         assertThat(matches).hasSize(1);
 
         new Verifications() {{
-            matchService.getCurrentMatches();
+            matchupService.getCurrentMatches();
             times = 1;
         }};
 
