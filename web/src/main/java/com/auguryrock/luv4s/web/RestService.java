@@ -1,8 +1,9 @@
-package com.auguryrock.web;
+package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,6 +15,7 @@ import java.util.List;
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Component
 public class RestService {
     @Autowired
     private MatchService matchService;

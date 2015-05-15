@@ -1,4 +1,4 @@
-package com.auguryrock.web;
+package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.service.MatchService;

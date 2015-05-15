@@ -1,4 +1,4 @@
-package com.auguryrock.web;
+package com.auguryrock.luv4s.web;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.cxf.endpoint.Server;

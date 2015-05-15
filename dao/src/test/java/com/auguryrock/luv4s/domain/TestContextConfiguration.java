@@ -3,6 +3,7 @@ package com.auguryrock.luv4s.domain;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Created by Jose on 15/05/2015.
@@ -10,5 +11,6 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @ComponentScan(basePackages = {"com.auguryrock.luv4s.domain"})
 @ImportResource("/applicationContext-derby.xml")
+@EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
 public class TestContextConfiguration {
 }

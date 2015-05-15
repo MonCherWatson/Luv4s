@@ -5,6 +5,7 @@ import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
 import com.auguryrock.luv4s.rest.Gw2V2Client;
 import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
 import org.springframework.context.annotation.*;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Created by Jose on 15/05/2015.
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.*;
 @Configuration
 @ComponentScan(basePackages = {"com.auguryrock.luv4s"}, excludeFilters=@ComponentScan.Filter(type = FilterType.ANNOTATION, value=Configuration.class))
 @ImportResource("/applicationContext-derby.xml")
+@EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
 public class TestContextConfiguration {
     @Bean
     public Gw2V1Client gw2V1Client() {
