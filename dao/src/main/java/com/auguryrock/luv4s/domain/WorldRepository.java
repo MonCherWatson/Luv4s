@@ -1,4 +1,4 @@
-package com.auguryrock.luv4s.persistence;
+package com.auguryrock.luv4s.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,6 +1,5 @@
-package com.auguryrock.luv4s.persistence;
+package com.auguryrock.luv4s.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
