@@ -6,14 +6,15 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.*;
 
 @Component
 public class MatchService {
-    @Autowired
+    @Resource(name = "gw2V1Client")
     protected Gw2V1Client gw2V1Client;
-    @Autowired
+    @Resource(name = "gw2V2Client")
     protected Gw2V2Client gw2V2Client;
     @Autowired
     private MatchupRepository matchupRepository;

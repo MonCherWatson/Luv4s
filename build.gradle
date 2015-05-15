@@ -1,7 +1,6 @@
 subprojects {
     ext {
         springVersion = "4.1.6.RELEASE"
-        emailNotification = "build@master.org"
     }
 
     apply plugin: 'java'
@@ -31,7 +30,9 @@ subprojects {
         compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxrs', version: '3.0.3'
         compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
-        compile 'org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE'
+        compile('org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE'){
+            exclude group: 'ch.qos.logback'
+        }
         compile 'org.aspectj:aspectjweaver:1.8.5'
 
         testCompile 'junit:junit:4.12'
