@@ -1,14 +1,18 @@
 package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.*;
-import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
-import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
+import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -18,8 +22,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/applicationContext-rest.xml", "/applicationContext-services.xml", "/applicationContext-derby.xml"})
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {TestContextConfiguration.class})
+@Transactional
 public class MatchupServiceTest {
+
     @Resource
     private MatchService matchService;
     @Resource
@@ -28,14 +34,7 @@ public class MatchupServiceTest {
     private ObjectiveService objectiveService;
 
 
-    @Before
-    public void init() {
-        matchService.gw2V1Client = new Gw2V1ClientMock();
-        matchService.gw2V2Client = new Gw2V2ClientMock();
-    }
-
     @Test
-    @Transactional
     public void testGetAllMatches() throws Exception {
         final List<Matchup> allMatchups = matchService.createMatches();
 
@@ -50,7 +49,6 @@ public class MatchupServiceTest {
     }
 
     @Test
-    @Transactional
     public void testCreateOrUpdateObjectives() {
         //prerequisites
         matchService.createMatches();
