@@ -13,5 +13,5 @@ apply plugin: 'spring-boot'
 mainClassName = 'com.auguryrock.luv4s.Luv4sApplication'
 
 dependencies {
-    compile project(':service')
+    compile project(':web')
 }

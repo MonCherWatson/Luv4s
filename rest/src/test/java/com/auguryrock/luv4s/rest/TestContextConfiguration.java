@@ -9,6 +9,6 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.auguryrock.luv4s.rest"})
-@ImportResource("/applicationContext-rest.xml")
+@ImportResource("/applicationContext-rest-client.xml")
 public class TestContextConfiguration {
 }

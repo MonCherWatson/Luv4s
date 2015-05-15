@@ -1,7 +1,7 @@
-package com.auguryrock.luv4s.service;
+package com.auguryrock.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
-import com.auguryrock.luv4s.rest.JAXRSTest;
+import com.auguryrock.luv4s.service.MatchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import mockit.Expectations;
@@ -32,7 +32,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
 
     @Before
     public void init() {
-        restService.matchService = matchService;
+        restService.setMatchService(matchService);
         initWebServices();
     }
 
