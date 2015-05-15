@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.rest;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Jose on 09/05/2015.
  */
 public abstract class JAXRSTest<T> {
-    private final static String ENDPOINT_ADDRESS = "http://localhost:8080/luv4s";
+    protected final static String ENDPOINT_ADDRESS = "http://localhost:8080/luv4s";
     private Server server;
 
     public void initWebServices() {
@@ -27,6 +28,7 @@ public abstract class JAXRSTest<T> {
 
         List<Object> providers = new ArrayList<>();
         // add custom providers if any
+        providers.add(new JacksonJsonProvider());
         sf.setProviders(providers);
 
         sf.setResourceProvider(getResourceClass(),

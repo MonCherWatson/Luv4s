@@ -20,7 +20,11 @@ public class RestService {
 
     @Path("/matches")
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Matchup> getCurrentMatches() {
-        return matchService.getCurrentMatches();
+        List<Matchup> currentMatches = matchService.getCurrentMatches();
+        System.out.println(currentMatches);
+        return currentMatches;
     }
 }
