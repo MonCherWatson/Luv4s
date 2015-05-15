@@ -1,8 +1,8 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.ObjectiveDescription;
-import com.auguryrock.luv4s.persistence.ObjectiveDescriptionRepository;
-import com.auguryrock.luv4s.persistence.ObjectiveType;
+import com.auguryrock.luv4s.domain.ObjectiveDescription;
+import com.auguryrock.luv4s.domain.ObjectiveDescriptionRepository;
+import com.auguryrock.luv4s.domain.ObjectiveType;
 import com.google.common.collect.Lists;
 import junit.framework.TestCase;
 import org.junit.Test;

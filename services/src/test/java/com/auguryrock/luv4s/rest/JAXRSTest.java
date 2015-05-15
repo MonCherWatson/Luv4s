@@ -3,11 +3,8 @@ package com.auguryrock.luv4s.rest;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.After;
+import org.junit.Before;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +16,12 @@ public abstract class JAXRSTest<T> {
     private final static String ENDPOINT_ADDRESS = "http://localhost:8080/luv4s";
     private Server server;
 
-    @BeforeClass
-    public void initialize() throws Exception {
+    public void initWebServices() {
         startServer();
     }
 
 
-    private void startServer() throws Exception {
+    private void startServer() {
         JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
         sf.setResourceClasses(getResourceClass());
 
@@ -34,13 +30,13 @@ public abstract class JAXRSTest<T> {
         sf.setProviders(providers);
 
         sf.setResourceProvider(getResourceClass(),
-        new SingletonResourceProvider(getResourceInstance(), true));
+                new SingletonResourceProvider(getResourceInstance(), true));
         sf.setAddress(ENDPOINT_ADDRESS);
 
         server = sf.create();
     }
 
-    @AfterClass
+    @After
     public void destroy() throws Exception {
         server.stop();
         server.destroy();

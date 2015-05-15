@@ -1,6 +1,6 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.*;
+import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.rest.JsonObjective;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescription;
 import com.auguryrock.luv4s.rest.JsonObjectiveDescriptionReader;

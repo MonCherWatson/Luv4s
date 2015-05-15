@@ -1,6 +1,6 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.*;
+import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
 import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
 import com.google.common.collect.Lists;

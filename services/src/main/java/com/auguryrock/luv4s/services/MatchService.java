@@ -1,6 +1,6 @@
 package com.auguryrock.luv4s.services;
 
-import com.auguryrock.luv4s.persistence.*;
+import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
