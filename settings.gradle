@@ -1,1 +1,1 @@
-include "dao", "rest", "services"
+include "dao", "rest", "service"

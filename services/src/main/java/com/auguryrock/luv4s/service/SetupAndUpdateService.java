@@ -1,4 +1,4 @@
-package com.auguryrock.luv4s.services;
+package com.auguryrock.luv4s.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
