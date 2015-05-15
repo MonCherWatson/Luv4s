@@ -12,7 +12,7 @@ public class WvWMap {
     protected Colour colour;
     @ManyToOne
     @JoinColumn(name ="match_id")
-    protected Match match;
+    protected Matchup matchup;
     @OneToMany(cascade = CascadeType.ALL)
     protected Set<Objective> objectives = new TreeSet<>();
 
@@ -59,12 +59,12 @@ public class WvWMap {
         return result;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatchup(Matchup matchup) {
+        this.matchup = matchup;
     }
 
-    public Match getMatch() {
-        return match;
+    public Matchup getMatchup() {
+        return matchup;
     }
 
     public void addOjective(Objective objective) {

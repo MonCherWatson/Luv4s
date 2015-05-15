@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WvWMapRepositoryTest {
     @Autowired
     WvWMapRepository mapRepository;
+    @Autowired
+    ObjectiveRepository objectiveRepository;
     @PersistenceContext
     EntityManager em;
 
@@ -25,6 +27,7 @@ public class WvWMapRepositoryTest {
     public void test_crud() {
         WvWMap map = new WvWMap();
         final Objective objective = new Objective();
+        objectiveRepository.save(objective);
         objective.setMap(map);
         map.getObjectives().add(objective);
         mapRepository.save(map);

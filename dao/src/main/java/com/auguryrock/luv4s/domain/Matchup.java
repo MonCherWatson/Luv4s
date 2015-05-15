@@ -4,23 +4,23 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Match {
+public class Matchup {
     @Id
     protected String id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchup")
     @MapKey(name = "colour")
     protected Map<Colour, World> worlds = new HashMap<>();
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchup")
     @MapKey(name = "colour")
     protected Map<Colour, WvWMap> wvwMaps = new HashMap<>();
 
     protected Zone zone;
 
-    public Match(String id) {
+    public Matchup(String id) {
         this.id = id;
     }
 
-    public Match(){
+    public Matchup(){
     }
 
     public String getId() {
@@ -42,12 +42,12 @@ public class Match {
     public void addWorld(World world) {
         assert world.getColour() != null;
         worlds.put(world.getColour(), world);
-        world.setMatch(this);
+        world.setMatchup(this);
     }
 
     public void addMaps(WvWMap map) {
         assert map.getColour() != null;
         wvwMaps.put(map.getColour(), map);
-        map.setMatch(this);
+        map.setMatchup(this);
     }
 }

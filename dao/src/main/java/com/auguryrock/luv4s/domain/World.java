@@ -8,7 +8,7 @@ public class World implements Comparable<World>{
     protected Integer id;
     @ManyToOne
     @JoinColumn(name ="match_id")
-    protected Match match;
+    protected Matchup matchup;
     protected Colour colour;
     protected Integer score;
     @Transient
@@ -34,12 +34,12 @@ public class World implements Comparable<World>{
         return name;
     }
 
-    public Match getMatch() {
-        return match;
+    public Matchup getMatchup() {
+        return matchup;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatchup(Matchup matchup) {
+        this.matchup = matchup;
     }
 
     public void setName(String name) {

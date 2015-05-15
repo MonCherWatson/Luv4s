@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-derby.xml"})
-public class MatchRepositoryTest {
+public class MatchupRepositoryTest {
     @Autowired
-    MatchRepository matchRepository;
+    MatchupRepository matchupRepository;
     @PersistenceContext
     EntityManager entityManager;
     @Autowired
@@ -26,26 +26,26 @@ public class MatchRepositoryTest {
     @Test
     @Transactional
     public void test_crud() {
-        final Match match = new Match("matchId");
+        final Matchup matchup = new Matchup("matchId");
 
         World world1 = new World(1, Colour.Blue);
         World world2 = new World(2, Colour.Red);
         World world3 = new World(3, Colour.Green);
 
-        match.addWorld(world1);
-        match.addWorld(world2);
-        match.addWorld(world3);
-        matchRepository.save(match);
+        matchup.addWorld(world1);
+        matchup.addWorld(world2);
+        matchup.addWorld(world3);
+        matchupRepository.save(matchup);
 
         entityManager.flush();
         entityManager.clear();
 
         Iterable<World> all = worldRepository.findAll();
         assertThat(all).hasSize(3);
-        assertThat(all.iterator().next().getMatch()).isNotNull();
+        assertThat(all.iterator().next().getMatchup()).isNotNull();
 
-        final Match match1 = matchRepository.findOne("matchId");
-        assertThat(match1).isNotNull();
-        assertThat(match1.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Green, Colour.Red).containsValues(world3, world2, world1);
+        final Matchup matchup1 = matchupRepository.findOne("matchId");
+        assertThat(matchup1).isNotNull();
+        assertThat(matchup1.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Green, Colour.Red).containsValues(world3, world2, world1);
     }
 }

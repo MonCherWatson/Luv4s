@@ -16,55 +16,55 @@ public class MatchService {
     @Autowired
     protected Gw2V2Client gw2V2Client;
     @Autowired
-    private MatchRepository matchRepository;
+    private MatchupRepository matchupRepository;
     @Autowired
     private WvWMapRepository mapRepository;
     @Autowired
     private ObjectiveService objectiveService;
 
-    public List<Match> createMatches() {
-        final ArrayList<Match> matches = new ArrayList<>();
+    public List<Matchup> createMatches() {
+        final ArrayList<Matchup> matchups = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
-            Match match = new Match(gw2Match.getId());
-            match.getWorlds().put(Colour.Blue, new World(gw2Match.getBlueWorldId(), Colour.Blue));
-            match.getWorlds().put(Colour.Green, new World(gw2Match.getGreenWorldId(), Colour.Green));
-            match.getWorlds().put(Colour.Red, new World(gw2Match.getRedWorldId(), Colour.Red));
+            Matchup matchup = new Matchup(gw2Match.getId());
+            matchup.getWorlds().put(Colour.Blue, new World(gw2Match.getBlueWorldId(), Colour.Blue));
+            matchup.getWorlds().put(Colour.Green, new World(gw2Match.getGreenWorldId(), Colour.Green));
+            matchup.getWorlds().put(Colour.Red, new World(gw2Match.getRedWorldId(), Colour.Red));
             if (gw2Match.getId().startsWith("2")) {
-                match.setZone(Zone.EU);
+                matchup.setZone(Zone.EU);
             } else {
-                match.setZone(Zone.US);
+                matchup.setZone(Zone.US);
             }
-            match = matchRepository.save(match);
-            matches.add(match);
+            matchup = matchupRepository.save(matchup);
+            matchups.add(matchup);
         }
-        return matches;
+        return matchups;
     }
 
-    public List<Match> createOrUpdateMaps() {
-        List<Match> matches = Lists.newArrayList(matchRepository.findAll());
-        for (Match match : matches) {
-            JsonMatchDetails matchDetails = gw2V1Client.getMatchDetails(match.getId());
-            updateScores(matchDetails.getScores(), match.getWorlds());
+    public List<Matchup> createOrUpdateMaps() {
+        List<Matchup> matchups = Lists.newArrayList(matchupRepository.findAll());
+        for (Matchup matchup : matchups) {
+            JsonMatchDetails matchDetails = gw2V1Client.getMatchDetails(matchup.getId());
+            updateScores(matchDetails.getScores(), matchup.getWorlds());
             for (JsonMap jsonMap : matchDetails.getMaps()) {
-                WvWMap map = createOrUpdateMap(jsonMap, match);
+                WvWMap map = createOrUpdateMap(jsonMap, matchup);
                 if (map != null) {
                     for (JsonObjective jsonObjective : jsonMap.getJsonObjectives()) {
                         objectiveService.createOrUpdateObjective(jsonObjective, map);
                     }
                 }
             }
-            matchRepository.save(match);
+            matchupRepository.save(matchup);
         }
-        return matches;
+        return matchups;
     }
 
 
-    protected WvWMap createOrUpdateMap(JsonMap jsonMap, Match match) {
+    protected WvWMap createOrUpdateMap(JsonMap jsonMap, Matchup matchup) {
         Colour mapColour = convertMapTypeColour(jsonMap.getType());
-        WvWMap wvwWMap = match.getWvwMaps().get(mapColour);
+        WvWMap wvwWMap = matchup.getWvwMaps().get(mapColour);
         if (wvwWMap == null) {
             wvwWMap = new WvWMap(mapColour);
-            match.addMaps(wvwWMap);
+            matchup.addMaps(wvwWMap);
         }
         return wvwWMap;
     }
@@ -100,8 +100,8 @@ public class MatchService {
     }
 
     @Transactional
-    public List<Match> getCurrentMatches() {
-        return Lists.newArrayList(matchRepository.findAll());
+    public List<Matchup> getCurrentMatches() {
+        return Lists.newArrayList(matchupRepository.findAll());
 
     }
 }

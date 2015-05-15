@@ -1,6 +1,6 @@
 package com.auguryrock.luv4s.service;
 
-import com.auguryrock.luv4s.domain.Match;
+import com.auguryrock.luv4s.domain.Matchup;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.Consumes;
@@ -20,7 +20,7 @@ public class RestService {
 
     @Path("/matches")
     @GET
-    public List<Match> getCurrentMatches() {
+    public List<Matchup> getCurrentMatches() {
         return matchService.getCurrentMatches();
     }
 }

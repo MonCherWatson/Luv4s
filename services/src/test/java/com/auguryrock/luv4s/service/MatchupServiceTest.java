@@ -19,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/applicationContext-rest.xml", "/applicationContext-services.xml", "/applicationContext-derby.xml"})
-public class MatchServiceTest {
+public class MatchupServiceTest {
     @Resource
     private MatchService matchService;
     @Resource
-    private MatchRepository matchRepository;
+    private MatchupRepository matchupRepository;
     @Resource
     private ObjectiveService objectiveService;
 
@@ -37,15 +37,15 @@ public class MatchServiceTest {
     @Test
     @Transactional
     public void testGetAllMatches() throws Exception {
-        final List<Match> allMatches = matchService.createMatches();
+        final List<Matchup> allMatchups = matchService.createMatches();
 
-        assertThat(allMatches).hasSize(17);
+        assertThat(allMatchups).hasSize(17);
 
-        Match match = allMatches.get(0);
-        assertThat(match.getId()).isEqualTo("2-3");
-        checkWorlds(match);
+        Matchup matchup = allMatchups.get(0);
+        assertThat(matchup.getId()).isEqualTo("2-3");
+        checkWorlds(matchup);
 
-        assertThat(match.getWvwMaps()).isEmpty();
+        assertThat(matchup.getWvwMaps()).isEmpty();
 
     }
 
@@ -59,18 +59,18 @@ public class MatchServiceTest {
 
         matchService.createOrUpdateMaps();
 
-        Match match = matchRepository.findOne("2-3");
-        checkWorlds(match);
+        Matchup matchup = matchupRepository.findOne("2-3");
+        checkWorlds(matchup);
 
-        assertThat(match.getWvwMaps()).hasSize(4);
-        WvWMap greenMap = match.getWvwMaps().get(Colour.Green);
+        assertThat(matchup.getWvwMaps()).hasSize(4);
+        WvWMap greenMap = matchup.getWvwMaps().get(Colour.Green);
 
         assertThat(greenMap.getObjectives()).hasSize(18);
 
         ArrayList<Objective> objectives = Lists.newArrayList(greenMap.getObjectives());
         Objective objective = objectives.get(0);
         assertThat(objective.getMap()).isEqualTo(greenMap);
-        assertThat(objective.getOwner()).isEqualTo(match.getWorlds().get(Colour.Green));
+        assertThat(objective.getOwner()).isEqualTo(matchup.getWorlds().get(Colour.Green));
         assertThat(objective.getDescription()).isNotNull();
         assertThat(objective.getDescription().getId()).isEqualTo(48);
 
@@ -81,10 +81,10 @@ public class MatchServiceTest {
         assertThat(objective.getDescription().getId()).isEqualTo(75);
     }
 
-    protected void checkWorlds(Match match) {
-        assertThat(match.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Red, Colour.Green);
+    protected void checkWorlds(Matchup matchup) {
+        assertThat(matchup.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Red, Colour.Green);
 
-        World world = match.getWorlds().get(Colour.Red);
+        World world = matchup.getWorlds().get(Colour.Red);
         assertThat(world.getColour()).isEqualTo(Colour.Red);
         assertThat(world.getId()).isEqualTo(2103);
     }

@@ -1,6 +1,6 @@
 package com.auguryrock.luv4s.service;
 
-import com.auguryrock.luv4s.domain.Match;
+import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.rest.JAXRSTest;
 import mockit.Expectations;
 import mockit.Mocked;
@@ -33,11 +33,11 @@ public class RestServiceTest extends JAXRSTest<RestService> {
     public void test() {
         new Expectations() {{
             matchService.getCurrentMatches();
-            result = new Match();
+            result = new Matchup();
         }};
 
-        List<Match> matches = restService.getCurrentMatches();
-        assertThat(matches).hasSize(1);
+        List<Matchup> matchups = restService.getCurrentMatches();
+        assertThat(matchups).hasSize(1);
 
         new Verifications() {{
             matchService.getCurrentMatches();

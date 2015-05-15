@@ -50,7 +50,7 @@ public class ObjectiveService {
             map.addOjective(objective);
         }
         Colour colour = Colour.valueOf(jsonObjective.getOwner());
-        World world = map.getMatch().getWorlds().get(colour);
+        World world = map.getMatchup().getWorlds().get(colour);
         objective.setOwner(world);
     }
 
