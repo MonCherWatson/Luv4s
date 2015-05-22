@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.*;
+import com.auguryrock.luv4s.rest.JsonWorld;
 import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;

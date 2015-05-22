@@ -1,4 +1,4 @@
-package com.auguryrock.luv4s.rest;
+package com.auguryrock.luv4s.domain.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

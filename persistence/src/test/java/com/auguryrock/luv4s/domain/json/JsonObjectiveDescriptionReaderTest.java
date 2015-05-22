@@ -1,6 +1,6 @@
-package com.auguryrock.luv4s.rest;
+package com.auguryrock.luv4s.domain.json;
 
-import org.assertj.core.api.Assertions;
+import com.auguryrock.luv4s.domain.TestContextConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {TestContextConfiguration.class})

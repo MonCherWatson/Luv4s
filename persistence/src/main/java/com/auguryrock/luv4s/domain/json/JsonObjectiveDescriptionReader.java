@@ -1,4 +1,4 @@
-package com.auguryrock.luv4s.rest;
+package com.auguryrock.luv4s.domain.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,17 +7,14 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by Jose on 22/05/2015.
- */
 @Component
-public class JsonWorldNameReader {
+public class JsonObjectiveDescriptionReader {
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public Map<String, JsonWorld> getObjectiveDescriptions() {
+    public Map<String, JsonObjectiveDescription> getObjectiveDescriptions() {
         final Map map;
         try {
-            map = mapper.readValue(getClass().getResourceAsStream("/worlds.json"), new TypeReference<Map<String, JsonWorld>>() { });
+            map = mapper.readValue(getClass().getResourceAsStream("/objectives.json"), new TypeReference<Map<String, JsonObjectiveDescription>>() { });
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
