@@ -1,18 +1,16 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
+import com.auguryrock.luv4s.domain.Zone;
 import com.auguryrock.luv4s.service.MatchupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/")
+@Path("/matches")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Component
@@ -21,7 +19,6 @@ public class RestService {
     private MatchupService matchupService;
 
 
-    @Path("/matches")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,6 +26,16 @@ public class RestService {
         List<Matchup> currentMatches = matchupService.getCurrentMatches();
         return currentMatches;
     }
+
+    @Path("/{zone}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Matchup> getCurrentMatchesByZone(@PathParam("zone") Zone zone) {
+        List<Matchup> currentMatches = matchupService.getCurrentMatchesByZone(zone);
+        return currentMatches;
+    }
+
 
     public void setMatchupService(MatchupService matchupService) {
         this.matchupService = matchupService;

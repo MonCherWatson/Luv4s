@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
+import com.auguryrock.luv4s.domain.Zone;
 import com.auguryrock.luv4s.service.MatchupService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
@@ -37,7 +38,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
     }
 
     @Test
-    public void test() throws JsonProcessingException {
+    public void test_matches() throws JsonProcessingException {
         new Expectations() {{
             matchupService.getCurrentMatches();
             result = new Matchup();
@@ -55,6 +56,28 @@ public class RestServiceTest extends JAXRSTest<RestService> {
         }};
 
     }
+
+    @Test
+    public void test_matches_by_zone() throws JsonProcessingException {
+        new Expectations() {{
+            matchupService.getCurrentMatchesByZone(Zone.EU);
+            result = new Matchup();
+        }};
+
+        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
+        WebTarget target = client.target("http://localhost:8080/luv4s");
+        List<Matchup> matches = target.path("matches/EU").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
+        });
+        assertThat(matches).hasSize(1);
+
+        new Verifications() {{
+            matchupService.getCurrentMatchesByZone(Zone.EU);
+            times = 1;
+        }};
+
+    }
+
+
 
     @Override
     protected RestService getResourceInstance() {

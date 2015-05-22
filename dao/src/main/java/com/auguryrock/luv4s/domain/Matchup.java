@@ -7,14 +7,16 @@ import java.util.*;
 public class Matchup {
     @Id
     protected String id;
+    protected Zone zone;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchup", fetch = FetchType.EAGER)
     @MapKey(name = "colour")
     protected Map<Colour, World> worlds = new HashMap<>();
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matchup", fetch = FetchType.EAGER)
     @MapKey(name = "colour")
     protected Map<Colour, WvWMap> wvwMaps = new HashMap<>();
 
-    protected Zone zone;
 
     public Matchup(String id) {
         this.id = id;
@@ -49,5 +51,9 @@ public class Matchup {
         assert map.getColour() != null;
         wvwMaps.put(map.getColour(), map);
         map.setMatchup(this);
+    }
+
+    public Zone getZone() {
+        return zone;
     }
 }

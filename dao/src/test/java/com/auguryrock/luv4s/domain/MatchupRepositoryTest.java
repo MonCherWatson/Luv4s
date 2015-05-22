@@ -53,4 +53,20 @@ public class MatchupRepositoryTest {
         assertThat(matchup1).isNotNull();
         assertThat(matchup1.getWorlds()).hasSize(3).containsKeys(Colour.Blue, Colour.Green, Colour.Red).containsValues(world3, world2, world1);
     }
+
+    @Test
+    @Transactional
+    public void test_findByZone() {
+        final Matchup matchup = new Matchup("matchId");
+        matchup.setZone(Zone.EU);
+
+        matchupRepository.save(matchup);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        assertThat(matchupRepository.findByZone(Zone.US)).isEmpty();
+        assertThat(matchupRepository.findByZone(Zone.EU)).hasSize(1);
+
+    }
 }

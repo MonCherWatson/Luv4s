@@ -27,6 +27,7 @@ public class MatchupService {
     @Autowired
     private ObjectiveService objectiveService;
 
+    @Transactional
     public List<Matchup> createMatches() {
         final ArrayList<Matchup> matchups = new ArrayList<>();
         for (JsonMatch gw2Match : gw2V1Client.getAllMatches().getJsonMatches()) {
@@ -46,6 +47,7 @@ public class MatchupService {
         return matchups;
     }
 
+    @Transactional
     public List<Matchup> createOrUpdateMaps() {
         List<Matchup> matchups = Lists.newArrayList(matchupRepository.findAll());
         for (Matchup matchup : matchups) {
@@ -62,6 +64,16 @@ public class MatchupService {
             matchupRepository.save(matchup);
         }
         return matchups;
+    }
+
+    @Transactional
+    public List<Matchup> getCurrentMatches() {
+        return Lists.newArrayList(matchupRepository.findAll());
+    }
+
+    @Transactional
+    public List<Matchup> getCurrentMatchesByZone(Zone zone) {
+        return Lists.newArrayList(matchupRepository.findByZone(zone));
     }
 
 
@@ -105,9 +117,5 @@ public class MatchupService {
         return map;
     }
 
-    @Transactional
-    public List<Matchup> getCurrentMatches() {
-        return Lists.newArrayList(matchupRepository.findAll());
 
-    }
 }
