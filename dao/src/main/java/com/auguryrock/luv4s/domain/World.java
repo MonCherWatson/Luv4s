@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class World implements Comparable<World>{
+public class World implements Comparable<World> {
     @Id
     protected Integer id;
     @ManyToOne
-    @JoinColumn(name ="match_id")
+    @JoinColumn(name = "match_id")
     @JsonIgnore
     protected Matchup matchup;
     protected Colour colour;
@@ -86,7 +86,6 @@ public class World implements Comparable<World>{
     public void setScore(Integer score) {
         this.score = score;
     }
-
 
 
 }
