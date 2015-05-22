@@ -1,5 +1,7 @@
 package com.auguryrock.luv4s.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,6 +14,7 @@ public class WvWMap {
     protected Colour colour;
     @ManyToOne
     @JoinColumn(name ="match_id")
+    @JsonIgnore
     protected Matchup matchup;
     @OneToMany(cascade = CascadeType.ALL)
     protected Set<Objective> objectives = new TreeSet<>();

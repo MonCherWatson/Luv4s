@@ -1,5 +1,7 @@
 package com.auguryrock.luv4s.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class World implements Comparable<World>{
     protected Integer id;
     @ManyToOne
     @JoinColumn(name ="match_id")
+    @JsonIgnore
     protected Matchup matchup;
     protected Colour colour;
     protected Integer score;

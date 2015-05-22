@@ -1,5 +1,7 @@
 package com.auguryrock.luv4s.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +13,7 @@ public class Objective implements Comparable<Objective>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer pk;
     @ManyToOne
+    @JsonIgnore
     protected WvWMap map;
     @ManyToOne
     protected ObjectiveDescription description;
