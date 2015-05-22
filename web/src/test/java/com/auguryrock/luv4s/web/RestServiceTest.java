@@ -23,7 +23,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by Jose on 09/05/2015.
+ * Created by MonCherWatson on 09/05/2015.
  */
 @RunWith(JMockit.class)
 public class RestServiceTest extends JAXRSTest<RestService> {

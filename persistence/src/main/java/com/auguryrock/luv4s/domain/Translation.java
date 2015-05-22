@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Created by Jose on 22/05/2015.
+ * Created by MonCherWatson on 22/05/2015.
  */
 @Entity
 public class Translation {

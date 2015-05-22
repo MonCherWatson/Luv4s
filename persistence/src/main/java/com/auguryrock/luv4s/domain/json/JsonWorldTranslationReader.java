@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Created by Jose on 22/05/2015.
+ * Created by MonCherWatson on 22/05/2015.
  */
 @Component
 public class JsonWorldTranslationReader {

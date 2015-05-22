@@ -6,7 +6,7 @@ import javax.ws.rs.QueryParam;
 import java.util.List;
 
 /**
- * Created by Jose on 01/05/2015.
+ * Created by MonCherWatson on 01/05/2015.
  */
 public class Gw2V2ClientMock extends AbstractMockRestClient implements Gw2V2Client {
     @Override

@@ -7,7 +7,7 @@ import com.auguryrock.luv4s.rest.JsonMatches;
 import javax.ws.rs.QueryParam;
 
 /**
- * Created by Jose on 01/05/2015.
+ * Created by MonCherWatson on 01/05/2015.
  */
 public class Gw2V1ClientMock extends AbstractMockRestClient implements Gw2V1Client {
     @Override

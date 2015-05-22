@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Jose on 09/05/2015.
+ * Created by MonCherWatson on 09/05/2015.
  */
 public abstract class JAXRSTest<T> {
     protected final static String ENDPOINT_ADDRESS = "http://localhost:8080/luv4s";

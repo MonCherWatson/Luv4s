@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 /**
- * Created by Jose on 08/05/2015.
+ * Created by MonCherWatson on 08/05/2015.
  */
 @Entity
 public class Objective implements Comparable<Objective>{

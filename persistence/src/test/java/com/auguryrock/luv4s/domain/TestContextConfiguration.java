@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * Created by Jose on 15/05/2015.
+ * Created by MonCherWatson on 15/05/2015.
  */
 @Configuration
 @ComponentScan(basePackages = {"com.auguryrock.luv4s.domain"})

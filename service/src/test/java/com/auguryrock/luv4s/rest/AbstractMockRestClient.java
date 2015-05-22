@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 /**
- * Created by Jose on 01/05/2015.
+ * Created by MonCherWatson on 01/05/2015.
  */
 public abstract class AbstractMockRestClient {
 

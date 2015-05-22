@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalTime;
 
 /**
- * Created by Jose on 09/05/2015.
+ * Created by MonCherWatson on 09/05/2015.
  */
 @Entity
 public class Period {
