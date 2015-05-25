@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.*;
+import com.auguryrock.luv4s.domain.json.JsonWorldTranslationReader;
 import com.auguryrock.luv4s.rest.JsonObjective;
 import com.auguryrock.luv4s.domain.json.JsonObjectiveDescription;
 import com.auguryrock.luv4s.domain.json.JsonObjectiveDescriptionReader;

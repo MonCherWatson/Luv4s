@@ -3,16 +3,10 @@ package com.auguryrock.luv4s.service;
 import com.auguryrock.luv4s.domain.ObjectiveDescription;
 import com.auguryrock.luv4s.domain.ObjectiveDescriptionRepository;
 import com.auguryrock.luv4s.domain.ObjectiveType;
-import com.auguryrock.luv4s.rest.Gw2V1Client;
-import com.auguryrock.luv4s.rest.Gw2V1ClientMock;
-import com.auguryrock.luv4s.rest.Gw2V2Client;
-import com.auguryrock.luv4s.rest.Gw2V2ClientMock;
 import com.google.common.collect.Lists;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -27,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestContextConfiguration.class)
-public class ObjectiveServiceTest  {
+public class ObjectiveServiceTest {
 
     @Autowired
     private ObjectiveService objectiveService;

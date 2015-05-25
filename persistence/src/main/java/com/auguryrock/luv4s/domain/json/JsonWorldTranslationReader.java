@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,13 +15,13 @@ import java.util.Map;
 public class JsonWorldTranslationReader {
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public Map<String, JsonWorldTranslation> getObjectiveDescriptions() {
-        final Map map;
+    public List<JsonWorldTranslation> getWorldTranslations() {
+        final List<JsonWorldTranslation> list;
         try {
-            map = mapper.readValue(getClass().getResourceAsStream("/worlds.json"), new TypeReference<Map<String, JsonWorldTranslation>>() { });
+            list = mapper.readValue(getClass().getResourceAsStream("/worlds.json"), new TypeReference<List<JsonWorldTranslation>>() { });
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
-        return map;
+        return list;
     }
 }
