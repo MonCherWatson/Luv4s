@@ -3,6 +3,7 @@ package com.auguryrock.luv4s.web;
 import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.domain.Zone;
 import com.auguryrock.luv4s.service.MatchupService;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Path("/matches")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@CrossOriginResourceSharing(allowAllOrigins = true)
 @Component
 public class RestService {
     @Autowired

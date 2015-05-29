@@ -20,6 +20,7 @@
 
         <jaxrs:providers>
             <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+            <bean class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
         </jaxrs:providers>
     </jaxrs:server>
 

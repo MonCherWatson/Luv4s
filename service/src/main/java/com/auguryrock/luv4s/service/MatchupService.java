@@ -74,7 +74,7 @@ public class MatchupService {
 
     @Transactional
     public List<Matchup> getCurrentMatchesByZone(Zone zone) {
-        return Lists.newArrayList(matchupRepository.findByZone(zone));
+        return Lists.newArrayList(matchupRepository.findByZoneOrderByIdAsc(zone));
     }
 
 
