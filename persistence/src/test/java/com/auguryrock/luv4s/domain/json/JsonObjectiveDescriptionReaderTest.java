@@ -14,8 +14,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-@ComponentScan(basePackages = {"com.auguryrock.luv4s.domain.json"})
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {com.auguryrock.luv4s.domain.json.TestContextConfiguration.class})
 public class JsonObjectiveDescriptionReaderTest {
     @Autowired
     JsonObjectiveDescriptionReader reader;
