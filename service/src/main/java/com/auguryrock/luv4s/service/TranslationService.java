@@ -36,5 +36,10 @@ public class TranslationService {
         translationRepository.save(entities);
     }
 
+    @Transactional
+    public List<Translation> getTranslationsByLanguage(Language language) {
+        return translationRepository.findByLanguageOrderByNameKeyAsc(language);
+    }
+
 
 }

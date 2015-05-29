@@ -20,6 +20,8 @@ public class SetupAndUpdateService {
     private ObjectiveService objectiveService;
     @Autowired
     private MatchupService matchupService;
+    @Autowired
+    private TranslationService translationService;
 
     @PostConstruct
     @Transactional
@@ -27,6 +29,7 @@ public class SetupAndUpdateService {
         logger.info("*********************ENTERING METHOD SETUP!");
         objectiveService.createObjectivesDescription();
         matchupService.createMatches();
+        translationService.createWorldTranslations();
     }
 
     @Transactional
