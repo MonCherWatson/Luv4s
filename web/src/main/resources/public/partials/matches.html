@@ -1,0 +1,24 @@
+<span>EU matches</span>
+<ul>
+    <li ng-repeat="match in euMatches">
+        <a href="match/{{match.id}}">{{match.id}}</a>
+        <ul>
+            <li ng-repeat="world in match.worlds">
+                <span> {{ world.nameKey | translate }} ({{world.colour}})</span>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+<span>US matches</span>
+<ul>
+    <li ng-repeat="match in usMatches">
+        <a href="match/{{match.id}}">{{match.id}}</a>
+        <ul>
+            <li ng-repeat="world in match.worlds">
+                <span> {{ world.nameKey | translate }} ({{world.colour}})</span>
+            </li>
+        </ul>
+    </li>
+</ul>

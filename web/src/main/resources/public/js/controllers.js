@@ -1,22 +1,11 @@
-var luv4sApp = angular.module('luv4sApp', ['ngResource','pascalprecht.translate']);
+var luv4sControllers = angular.module('luv4sControllers', []);
 
-luv4sApp.factory("Matches", function($resource) {
-  return $resource("http://localhost:8080/ws/matches/:region");
-});
-
-
-
-luv4sApp.config(function($translateProvider) {
-    $translateProvider.useUrlLoader('http://localhost:8080/ws/translations');
-    $translateProvider.preferredLanguage('fr');
-});
-
-luv4sApp.controller("MatchesCtrl", function($scope, Matches) {
-  Matches.query({ region: "EU" }, function(data) {
+luv4sControllers.controller("matchesCtrl", function($scope, matchesResource) {
+  matchesResource.query({ region: "EU" }, function(data) {
     $scope.euMatches = data;
   });
 
-  Matches.query({ region: "US" }, function(data) {
+  matchesResource.query({ region: "US" }, function(data) {
       $scope.usMatches = data;
     });
 });
