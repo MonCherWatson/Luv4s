@@ -1,6 +1,7 @@
 subprojects {
     ext {
         springVersion = "4.1.6.RELEASE"
+        springBootVersion = '1.2.4.RELEASE'
         cxfVersion = '3.0.3'
     }
 
@@ -33,10 +34,15 @@ subprojects {
         compile group: 'org.apache.cxf', name: 'cxf-rt-rs-security-cors', version: cxfVersion
         compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
-        compile('org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE'){
+        compile(group:'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion){
             exclude group: 'ch.qos.logback'
         }
         compile 'org.aspectj:aspectjweaver:1.8.5'
+
+        compile 'io.jsonwebtoken:jjwt:0.5'
+        compile(group:'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion) {
+            exclude group: 'ch.qos.logback'
+        }
 
         testCompile 'junit:junit:4.12'
         testCompile 'org.assertj:assertj-core:3.0.0'

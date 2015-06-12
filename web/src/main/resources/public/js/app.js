@@ -23,17 +23,17 @@ luv4sApp.config(['$routeProvider',
 
 
   luv4sApp.factory('matchesResource', function($resource) {
-    return $resource("http://localhost:8080/ws/matches?zone=:zone");
+    return $resource("http://localhost:8080/api/matches?zone=:zone");
   });
 
 
 luv4sApp.factory('matchResource', function($resource) {
-    return $resource("http://localhost:8080/ws/matches/:matchId");
+    return $resource("http://localhost:8080/api/matches/:matchId");
   });
 
 
   luv4sApp.config(function($translateProvider) {
-      $translateProvider.useUrlLoader('http://localhost:8080/ws/translations');
+      $translateProvider.useUrlLoader('http://localhost:8080/api/translations');
       $translateProvider.preferredLanguage('fr');
   });
 

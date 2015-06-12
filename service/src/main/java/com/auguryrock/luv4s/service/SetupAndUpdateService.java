@@ -26,7 +26,6 @@ public class SetupAndUpdateService {
     @PostConstruct
     @Transactional
     public void setup() {
-        logger.info("*********************ENTERING METHOD SETUP!");
         objectiveService.createObjectivesDescription();
         matchupService.createMatches();
         translationService.createWorldTranslations();

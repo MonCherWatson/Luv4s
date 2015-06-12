@@ -32,7 +32,7 @@ public class RestService {
         if (zone != null) {
             return matchupService.getCurrentMatchesByZone(zone);
         } else {
-            return  matchupService.getCurrentMatches();
+            return matchupService.getCurrentMatches();
         }
     }
 
@@ -42,6 +42,11 @@ public class RestService {
         return matchupService.getMatch(id);
     }
 
+    @Path("/login/{user}/{password}")
+    @GET
+    public String getToken(@PathParam("user") String user, @PathParam("password") String password) {
+        return user + "*" + password;
+    }
 
     @Path("/translations")
     @GET

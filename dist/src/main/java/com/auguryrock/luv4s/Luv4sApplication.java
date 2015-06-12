@@ -23,7 +23,7 @@ public class Luv4sApplication {
 
     @Bean
     public ServletRegistrationBean cxfServlet() {
-        return new ServletRegistrationBean(new CXFServlet(), "/ws/*");
+        return new ServletRegistrationBean(new CXFServlet(), "/api/*");
     }
 
     @Bean
