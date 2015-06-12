@@ -8,10 +8,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class ObjectiveDescription {
+    public static final String OBJECTIVE_DESCRIPTION= "objectiveDescription";
+
     @Id
     private Integer id;
     private ObjectiveType type;
-    private String name;
+    private String nameKey;
 
     public Integer getId() {
         return id;
@@ -29,11 +31,11 @@ public class ObjectiveDescription {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
+    public String getNameKey() {
+        return nameKey;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameKey(String nameKey) {
+        this.nameKey = nameKey;
     }
 }

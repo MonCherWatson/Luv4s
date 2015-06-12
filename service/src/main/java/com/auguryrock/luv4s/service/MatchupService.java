@@ -77,6 +77,11 @@ public class MatchupService {
         return Lists.newArrayList(matchupRepository.findByZoneOrderByIdAsc(zone));
     }
 
+    @Transactional
+    public Matchup getMatch(String id) {
+        return matchupRepository.findOne(id);
+    }
+
 
     protected WvWMap createOrUpdateMap(JsonMap jsonMap, Matchup matchup) {
         Colour mapColour = convertMapTypeColour(jsonMap.getType());
@@ -105,8 +110,8 @@ public class MatchupService {
 
     protected void updateScores(List<Integer> scores, Map<Colour, World> worlds) {
         worlds.get(Colour.Red).setScore(scores.get(0));
-        worlds.get(Colour.Green).setScore(scores.get(1));
-        worlds.get(Colour.Blue).setScore(scores.get(2));
+        worlds.get(Colour.Blue).setScore(scores.get(1));
+        worlds.get(Colour.Green).setScore(scores.get(2));
     }
 
     protected Map<Integer, String> getWorldNames(String lang) {

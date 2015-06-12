@@ -66,12 +66,30 @@ public class RestServiceTest extends JAXRSTest<RestService> {
 
         Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
         WebTarget target = client.target("http://localhost:8080/luv4s");
-        List<Matchup> matches = target.path("matches/EU").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
+        List<Matchup> matches = target.path("matches").queryParam("zone", Zone.EU).request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
         });
         assertThat(matches).hasSize(1);
 
         new Verifications() {{
             matchupService.getCurrentMatchesByZone(Zone.EU);
+            times = 1;
+        }};
+
+    }
+
+    @Test
+    public void test_match_by_id() throws JsonProcessingException {
+        new Expectations() {{
+            matchupService.getMatch("2-1");
+            result = new Matchup();
+        }};
+
+        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
+        WebTarget target = client.target("http://localhost:8080/luv4s");
+        Matchup match = target.path("matches/2-1").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(Matchup.class);
+        assertThat(match).isNotNull();
+        new Verifications() {{
+            matchupService.getMatch("2-1");
             times = 1;
         }};
 

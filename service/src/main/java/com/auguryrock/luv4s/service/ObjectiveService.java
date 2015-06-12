@@ -28,6 +28,8 @@ public class ObjectiveService {
     private WorldRepository worldRepository;
     @Autowired
     private ObjectiveRepository objectiveRepository;
+    @Autowired
+    private TranslationService translationService;
 
     @Transactional
     public void createObjectivesDescription() {
@@ -35,13 +37,17 @@ public class ObjectiveService {
         if (objectiveRepository.count() != 0) {
             return;
         }
-        for (Map.Entry<String, JsonObjectiveDescription> o : objectiveDescriptionReader.getObjectiveDescriptions().entrySet()) {
+        for (Map.Entry<String, JsonObjectiveDescription> entry : objectiveDescriptionReader.getObjectiveDescriptions().entrySet()) {
+            String key = entry.getKey();
+            JsonObjectiveDescription value = entry.getValue();
+
             ObjectiveDescription objectiveDescription = new ObjectiveDescription();
-            objectiveDescription.setId(Integer.valueOf(o.getKey()));
-            JsonObjectiveDescription value = o.getValue();
-            objectiveDescription.setName(value.getNames().get("en"));
+            objectiveDescription.setId(Integer.valueOf(key));
+            objectiveDescription.setNameKey(ObjectiveDescription.OBJECTIVE_DESCRIPTION + key);
             objectiveDescription.setType(ObjectiveType.valueOf(value.getType().toUpperCase()));
             objectiveDescriptionRepository.save(objectiveDescription);
+
+            translationService.createObjectiveTranslation(key, value);
         }
         logger.info(objectiveDescriptionRepository.count()+ " Objective Descriptions have been saved.");
     }

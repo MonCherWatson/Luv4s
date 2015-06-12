@@ -1,0 +1,14 @@
+<ul>
+    <li ng-repeat="world in match.worlds">
+        <span> {{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</span>
+    </li>
+    <span>Maps</span>
+    <li ng-repeat="wvwMap in match.wvwMaps">
+        <span> {{ wvwMap.colour}}</span>
+        <ul>
+            <li ng-repeat="objective in wvwMap.objectives | orderBy: 'description.id' | onlyHardStuff">
+                <span> {{ objective.description.nameKey | translate}}, {{ objective.owner.colour}}</span>
+            </li>
+        </ul>
+    </li>
+</ul>

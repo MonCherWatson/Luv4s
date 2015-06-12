@@ -28,17 +28,20 @@ public class RestService {
 
     @Path("/matches")
     @GET
-    public List<Matchup> getCurrentMatches() {
-        List<Matchup> currentMatches = matchupService.getCurrentMatches();
-        return currentMatches;
+    public List<Matchup> getCurrentMatchesByZone(@QueryParam("zone") Zone zone) {
+        if (zone != null) {
+            return matchupService.getCurrentMatchesByZone(zone);
+        } else {
+            return  matchupService.getCurrentMatches();
+        }
     }
 
-    @Path("/matches/{zone}")
+    @Path("/matches/{matchId}")
     @GET
-    public List<Matchup> getCurrentMatchesByZone(@PathParam("zone") Zone zone) {
-        List<Matchup> currentMatches = matchupService.getCurrentMatchesByZone(zone);
-        return currentMatches;
+    public Matchup getMatch(@PathParam("matchId") String id) {
+        return matchupService.getMatch(id);
     }
+
 
     @Path("/translations")
     @GET
