@@ -2,7 +2,10 @@ package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.domain.Zone;
+import com.auguryrock.luv4s.domain.scouting.Player;
 import com.auguryrock.luv4s.service.MatchupService;
+import com.auguryrock.luv4s.service.player.PlayerCreation;
+import com.auguryrock.luv4s.service.player.PlayerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import mockit.Expectations;
@@ -15,7 +18,9 @@ import org.junit.runner.RunWith;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -30,10 +35,13 @@ public class RestServiceTest extends JAXRSTest<RestService> {
     private RestService restService = new RestService();
     @Mocked
     private MatchupService matchupService;
+    @Mocked
+    private PlayerService playerService;
 
     @Before
     public void init() {
         restService.setMatchupService(matchupService);
+        restService.setPlayerService(playerService);
         initWebServices();
     }
 
@@ -44,9 +52,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
             result = new Matchup();
         }};
 
-        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
-        WebTarget target = client.target("http://localhost:8080/luv4s");
-        List<Matchup> matches = target.path("matches").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
+        List<Matchup> matches = getWebTarget().path("matches").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
         });
         assertThat(matches).hasSize(1);
 
@@ -64,9 +70,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
             result = new Matchup();
         }};
 
-        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
-        WebTarget target = client.target("http://localhost:8080/luv4s");
-        List<Matchup> matches = target.path("matches").queryParam("zone", Zone.EU).request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
+        List<Matchup> matches = getWebTarget().path("matches").queryParam("zone", Zone.EU).request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<List<Matchup>>() {
         });
         assertThat(matches).hasSize(1);
 
@@ -84,9 +88,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
             result = new Matchup();
         }};
 
-        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
-        WebTarget target = client.target("http://localhost:8080/luv4s");
-        Matchup match = target.path("matches/2-1").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(Matchup.class);
+        Matchup match = getWebTarget().path("matches/2-1").request(MediaType.APPLICATION_JSON_TYPE).accept(MediaType.APPLICATION_JSON_TYPE).get(Matchup.class);
         assertThat(match).isNotNull();
         new Verifications() {{
             matchupService.getMatch("2-1");
@@ -95,6 +97,33 @@ public class RestServiceTest extends JAXRSTest<RestService> {
 
     }
 
+    @Test
+    public void test_create_player() {
+        Player player = new Player();
+        player.setName("name");
+        player.setAccountId("accountId");
+        new Expectations() {{
+            playerService.createPlayer(player);
+            result = new PlayerCreation();
+        }};
+
+        PlayerCreation creation = getWebTarget().path("player/create").request(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.json(player), PlayerCreation.class);
+
+        assertThat(creation).isNotNull();
+
+        new Verifications() {{
+            playerService.createPlayer(player);
+            times = 1;
+        }};
+
+    }
+
+    protected WebTarget getWebTarget() {
+        Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
+        return client.target("http://localhost:8080/luv4s");
+    }
 
 
     @Override

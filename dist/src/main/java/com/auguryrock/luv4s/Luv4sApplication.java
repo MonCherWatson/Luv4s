@@ -2,7 +2,9 @@ package com.auguryrock.luv4s;
 
 import org.apache.cxf.transport.servlet.CXFServlet;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
@@ -19,6 +21,7 @@ import javax.servlet.Filter;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
 @EnableScheduling
+@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class Luv4sApplication {
 
     @Bean

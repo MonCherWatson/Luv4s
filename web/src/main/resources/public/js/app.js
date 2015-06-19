@@ -16,6 +16,10 @@ luv4sApp.config(['$routeProvider',
         templateUrl: 'partials/match.html',
         controller: 'matchCtrl'
       }).
+       when('/player/signUp', {
+              templateUrl: 'partials/signUp.html',
+              controller: 'signUpCtrl'
+            }).
       otherwise({
         redirectTo: '/matches'
       });

@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.service.player;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Map;
  */
 public class PlayerCreation {
     private Status status = Status.OK;
-    private Map<String, FieldStatus> fields;
+    private Map<String, FieldStatus> fields = new HashMap<>();
 
     public enum Status {
         OK, KO;

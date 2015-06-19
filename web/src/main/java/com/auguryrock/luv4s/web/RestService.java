@@ -69,8 +69,9 @@ public class RestService {
     }
 
     @Path("/player/create")
-    @GET
+    @POST
     public PlayerCreation createAccount(Player player) {
+        logger.info("Create player: "+player.getName());
         return playerService.createPlayer(player);
     }
 
@@ -90,5 +91,9 @@ public class RestService {
 
     public void setMatchupService(MatchupService matchupService) {
         this.matchupService = matchupService;
+    }
+
+    public void setPlayerService(PlayerService playerService) {
+        this.playerService = playerService;
     }
 }
