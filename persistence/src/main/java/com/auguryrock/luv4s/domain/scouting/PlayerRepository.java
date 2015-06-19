@@ -8,4 +8,6 @@ import org.springframework.data.repository.Repository;
  */
 public interface PlayerRepository extends Repository<Player, Integer>, CrudRepository<Player, Integer> {
     Player findByName(String name);
+    Player findByAccountId(String accountId);
+
 }

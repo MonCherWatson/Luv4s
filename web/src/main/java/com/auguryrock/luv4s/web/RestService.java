@@ -1,19 +1,25 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.*;
+import com.auguryrock.luv4s.domain.scouting.Player;
 import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
 import com.auguryrock.luv4s.service.MatchupService;
 import com.auguryrock.luv4s.service.TranslationService;
+import com.auguryrock.luv4s.service.player.PlayerCreation;
+import com.auguryrock.luv4s.service.player.PlayerService;
+import com.auguryrock.luv4s.service.security.SecurityService;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,6 +35,10 @@ public class RestService {
     private MatchupService matchupService;
     @Autowired
     private TranslationService translationService;
+    @Autowired
+    private SecurityService securityService;
+    @Autowired
+    private PlayerService playerService;
 
 
     @Path("/matches")
@@ -47,10 +57,21 @@ public class RestService {
         return matchupService.getMatch(id);
     }
 
-    @Path("/login/{player}/{password}")
+    @Path("/player/login/{player}/{password}")
     @GET
-    public String getToken(@PathParam("player") String user, @PathParam("password") String password) {
-        return user + "*" + password;
+    public Response getToken(@PathParam("player") String user, @PathParam("password") String password) {
+        try {
+            String jwt = securityService.checkCredentialsAndGenerateJwt(user, password);
+            return Response.status(Response.Status.OK).entity(jwt).build();
+        } catch (AuthenticationException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+    }
+
+    @Path("/player/create")
+    @GET
+    public PlayerCreation createAccount(Player player) {
+        return playerService.createPlayer(player);
     }
 
     @Path("/translations")

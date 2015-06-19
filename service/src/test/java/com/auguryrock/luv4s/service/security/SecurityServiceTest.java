@@ -1,10 +1,12 @@
-package com.auguryrock.luv4s.service;
+package com.auguryrock.luv4s.service.security;
 
 import com.auguryrock.luv4s.domain.scouting.*;
-import org.assertj.core.api.Assertions;
+import com.auguryrock.luv4s.service.TestContextConfiguration;
+import io.jsonwebtoken.JwtException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -19,9 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = TestContextConfiguration.class)
 @Transactional
-public class PlayerServiceTest {
+public class SecurityServiceTest {
     @Autowired
-    PlayerService playerService;
+    SecurityService securityService;
     @Autowired
     PlayerRepository playerRepository;
     @Autowired
@@ -29,10 +31,26 @@ public class PlayerServiceTest {
     @Autowired
     ScoutingKeyRepository scoutingKeyRepository;
 
+    @Test
+    public void testGoodToken()  {
+        Player player = new Player();
+        player.setName("foo");
+
+        String s = securityService.generateJwt(player);
+        String userFromToken = securityService.getPlayerNameFromToken(s);
+
+        assertThat("foo").isEqualTo(userFromToken);
+    }
+
+
+    @Test(expected = JwtException.class)
+    public void testWrongToken() {
+        securityService.getPlayerNameFromToken("foo.foo.");
+    }
 
     @Test(expected = RuntimeException.class)
     public void testWrongPlayerName() {
-        playerService.getRoleType("foo", "foo");
+        securityService.getAuthorities("foo", "foo");
     }
 
     @Test
@@ -41,7 +59,7 @@ public class PlayerServiceTest {
         player.setName("scout");
         playerRepository.save(player);
 
-        assertThat(playerService.getRoleType("scout", "foo")).isEqualTo(RoleType.basic);
+        assertThat(securityService.getAuthorities("scout", "foo")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()));
     }
 
     @Test
@@ -59,9 +77,11 @@ public class PlayerServiceTest {
         role.setRoleType(RoleType.master);
         roleRepository.save(role);
 
-        assertThat(playerService.getRoleType("scout", "key")).isEqualTo(RoleType.master);
+        assertThat(securityService.getAuthorities("scout", "key")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()),
+                new SimpleGrantedAuthority(RoleType.master.toString()));
 
 
     }
+
 
 }
