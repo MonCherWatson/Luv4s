@@ -4,5 +4,5 @@ package com.auguryrock.luv4s.domain.scouting;
  * Created by MonCherWatson on 19/06/2015.
  */
 public enum RoleType {
-    standard, admin, banned
+    basic, master, admin, banned
 }

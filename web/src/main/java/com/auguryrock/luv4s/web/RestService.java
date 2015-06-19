@@ -41,9 +41,9 @@ public class RestService {
         return matchupService.getMatch(id);
     }
 
-    @Path("/login/{user}/{password}")
+    @Path("/login/{player}/{password}")
     @GET
-    public String getToken(@PathParam("user") String user, @PathParam("password") String password) {
+    public String getToken(@PathParam("player") String user, @PathParam("password") String password) {
         return user + "*" + password;
     }
 

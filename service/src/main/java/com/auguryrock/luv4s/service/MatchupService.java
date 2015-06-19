@@ -15,7 +15,7 @@ import java.util.*;
 
 @Component
 public class MatchupService {
-    final static Logger logger = LoggerFactory.getLogger(MatchupService.class);
+    private final static Logger logger = LoggerFactory.getLogger(MatchupService.class);
 
     @Resource(name = "gw2V1Client")
     protected Gw2V1Client gw2V1Client;

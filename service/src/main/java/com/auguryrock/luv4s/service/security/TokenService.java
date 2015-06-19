@@ -1,14 +1,14 @@
 package com.auguryrock.luv4s.service.security;
 
-import com.auguryrock.luv4s.domain.scouting.User;
+import com.auguryrock.luv4s.domain.scouting.Player;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.security.Key;
 import java.sql.Date;
 import java.time.Instant;
@@ -29,16 +29,16 @@ public class TokenService {
         key = (Key) objectInputStream.readObject();
     }
 
-    public String generateToken(User user) {
+    public String generateToken(Player player) {
         Instant instant = LocalDateTime.now().plusDays(7).atZone(ZoneId.systemDefault()).toInstant();
 
-        String compact = Jwts.builder().setSubject(user.getName()).setExpiration(Date.from(instant))
+        String compact = Jwts.builder().setSubject(player.getName()).setExpiration(Date.from(instant))
                 .signWith(SignatureAlgorithm.HS512, key).compact();
 
         return compact;
     }
 
-    public String getUserFromToken(String token) {
+    public String getPlayerNameFromToken(String token) {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
     }
 

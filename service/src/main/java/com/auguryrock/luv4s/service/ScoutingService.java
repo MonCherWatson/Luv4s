@@ -1,7 +1,7 @@
 package com.auguryrock.luv4s.service;
 
 public class ScoutingService {
-//    public ScoutingSession createScoutingSessionOnStructure(User scout, Structure structure) {
+//    public ScoutingSession createScoutingSessionOnStructure(Player scout, Structure structure) {
 //        return null;
 //    }
 }
