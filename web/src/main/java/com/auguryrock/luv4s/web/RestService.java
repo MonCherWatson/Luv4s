@@ -5,7 +5,11 @@ import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
 import com.auguryrock.luv4s.service.MatchupService;
 import com.auguryrock.luv4s.service.TranslationService;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -19,6 +23,8 @@ import java.util.List;
 @CrossOriginResourceSharing(allowAllOrigins = true)
 @Component
 public class RestService {
+    private final static Logger logger = LoggerFactory.getLogger(RestService.class);
+
     @Autowired
     private MatchupService matchupService;
     @Autowired
@@ -56,6 +62,8 @@ public class RestService {
     @Path("/scoutingsessions")
     @GET
     public List<ScoutingSession> getScoutingSessions() {
+        logger.info(SecurityContextHolder.getContext().getAuthentication().getName());
+        logger.info(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
         return Collections.EMPTY_LIST;
     }
 

@@ -10,7 +10,6 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -26,8 +25,8 @@ import java.io.IOException;
  * Created by MonCherWatson on 12/06/2015.
  */
 @Component
-public class AuthenticationFilter extends GenericFilterBean {
-    private final static Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+public class JwtAuthenticationFilter extends GenericFilterBean {
+    private final static Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -35,6 +34,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        logger.info("Checking for Jwt token...");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         String token = httpServletRequest.getHeader("X-Auth-Token");
@@ -51,8 +51,8 @@ public class AuthenticationFilter extends GenericFilterBean {
                     throw new InternalAuthenticationServiceException("Unable to authenticate Domain Player for provided credentials");
                 }
                 SecurityContextHolder.getContext().setAuthentication(result);
-                chain.doFilter(request, response);
             }
+            chain.doFilter(request, response);
         } catch (AuthenticationException e) {
             logger.error(e.getMessage(), e);
             SecurityContextHolder.clearContext();

@@ -1,5 +1,8 @@
 package com.auguryrock.luv4s;
 
+import com.auguryrock.luv4s.service.security.TokenAuthenticationProvider;
+import com.auguryrock.luv4s.web.security.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +22,15 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private TokenAuthenticationProvider tokenAuthenticationProvider;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    protected WebSecurityConfiguration() {
+        super(true);
+    }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/api/matches/**").antMatchers("/api/translations/**").antMatchers("/api/login/**");
@@ -25,15 +38,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().formLogin().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().anyRequest().fullyAuthenticated();
+        http.authorizeRequests().anyRequest().fullyAuthenticated();
+        http.addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter.class);
 
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) {
 //        auth.userDetailsService()
-    }
+//    }
 
     @Bean
     public AuthenticationEntryPoint unauthorizedEntryPoint() {
