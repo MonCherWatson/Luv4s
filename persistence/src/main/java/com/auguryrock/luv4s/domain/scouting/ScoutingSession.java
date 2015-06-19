@@ -1,4 +1,7 @@
-package com.auguryrock.luv4s.domain;
+package com.auguryrock.luv4s.domain.scouting;
+
+import com.auguryrock.luv4s.domain.Objective;
+import com.auguryrock.luv4s.domain.scouting.User;
 
 import java.util.Date;
 

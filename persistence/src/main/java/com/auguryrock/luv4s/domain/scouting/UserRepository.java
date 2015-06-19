@@ -1,5 +1,6 @@
-package com.auguryrock.luv4s.domain;
+package com.auguryrock.luv4s.domain.scouting;
 
+import com.auguryrock.luv4s.domain.Objective;
 import org.springframework.data.repository.CrudRepository;
 
 /**

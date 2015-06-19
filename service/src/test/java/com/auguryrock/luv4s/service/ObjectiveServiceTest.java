@@ -37,6 +37,6 @@ public class ObjectiveServiceTest {
         ObjectiveDescription description = repository.findOne(1);
         assertThat(description.getId()).isEqualTo(1);
         assertThat(description.getType()).isEqualTo(ObjectiveType.KEEP);
-        assertThat(description.getName()).isEqualTo("Overlook");
+        assertThat(description.getNameKey()).isEqualTo("objectiveDescription1");
     }
 }

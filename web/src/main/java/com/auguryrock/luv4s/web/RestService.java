@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.*;
+import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
 import com.auguryrock.luv4s.service.MatchupService;
 import com.auguryrock.luv4s.service.TranslationService;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
