@@ -62,7 +62,7 @@ public class RestService {
     public Response getToken(@PathParam("player") String user, @PathParam("password") String password) {
         try {
             String jwt = securityService.checkCredentialsAndGenerateJwt(user, password);
-            return Response.status(Response.Status.OK).entity(jwt).build();
+            return Response.status(Response.Status.OK).entity(new TokenResponse(jwt)).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
@@ -101,5 +101,13 @@ public class RestService {
 
     public void setPlayerService(PlayerService playerService) {
         this.playerService = playerService;
+    }
+
+    protected static class TokenResponse {
+        public String token;
+
+        public TokenResponse(String token) {
+            this.token = token;
+        }
     }
 }

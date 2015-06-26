@@ -3,7 +3,8 @@
 var luv4sApp = angular.module('luv4sApp', ['ngResource',
     'pascalprecht.translate',
      'ngRoute',
-     'luv4sControllers']);
+     'luv4sControllers',
+     'services']);
 
 luv4sApp.config(['$routeProvider',
   function($routeProvider) {
@@ -20,6 +21,10 @@ luv4sApp.config(['$routeProvider',
               templateUrl: 'partials/signUp.html',
               controller: 'signUpCtrl'
             }).
+            when('/player/login', {
+                          templateUrl: 'partials/login.html',
+                          controller: 'loginCtrl'
+                        }).
       otherwise({
         redirectTo: '/matches'
       });

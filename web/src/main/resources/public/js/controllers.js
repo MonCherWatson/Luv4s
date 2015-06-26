@@ -19,12 +19,12 @@ luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchRes
 });
 
 
-luv4sControllers.controller("signUpCtrl", function($scope, $http) {
+luv4sControllers.controller("signUpCtrl", function($scope, $http, authService) {
     $scope.submit = function() {
         $scope.signUpErrors = {}
         $http.post('http://localhost:8080/api/player/create', $scope.player).
           success(function(data, status, headers, config) {
-            console.log("signUp success");
+            authService.login($scope.player.name, $scope.player.password);
           }).
           error(function(data, status, headers, config) {
             console.log("signUp error");
@@ -39,5 +39,13 @@ luv4sControllers.controller("signUpCtrl", function($scope, $http) {
             }
 
           });
+    }
+});
+
+
+luv4sControllers.controller("loginCtrl", function(authService, $rootScope, $scope) {
+    $scope.submit = function() {
+        authService.login($scope.player.name, $scope.player.password);
+        $scope.invalid = !($rootScope.authenticated === true);
     }
 });

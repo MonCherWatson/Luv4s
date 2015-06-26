@@ -1,0 +1,12 @@
+<div ng-controller="loginCtrl">
+    <form name="loginForm" ng-submit="submit()">
+        <div>
+            Name: <input type="text" name="name" ng-model="player.name" required=""></br>
+        </div>
+        <div>
+            Password: <input type="text" name="password" ng-model="player.password" required=""></br>
+        </div>
+        <span ng-show="invalid">Invalid name/password</span>
+        <input type="submit" value="Login!" />
+    </form>
+</div>
