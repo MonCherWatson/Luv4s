@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -23,6 +24,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -103,7 +105,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
         player.setName("name");
         player.setAccountId("accountId");
         new Expectations() {{
-            playerService.createPlayer(player);
+            playerService.createPlayer(withInstanceOf(Player.class));
             result = new PlayerCreation();
         }};
 
@@ -114,8 +116,46 @@ public class RestServiceTest extends JAXRSTest<RestService> {
         assertThat(creation).isNotNull();
 
         new Verifications() {{
-            playerService.createPlayer(player);
+            Player capPlayer;
+            playerService.createPlayer(capPlayer = withCapture());
             times = 1;
+
+            assertThat(capPlayer.getName().equals(player.getName()));
+            assertThat(capPlayer.getAccountId().equals(player.getAccountId()));
+        }};
+
+    }
+
+
+    @Test
+    public void test_create_player_ko() {
+        Player player = new Player();
+        player.setName("name");
+        player.setAccountId("accountId");
+
+        final PlayerCreation playerCreation = new PlayerCreation();
+        playerCreation.setStatus(PlayerCreation.Status.KO);
+        new Expectations() {{
+            playerService.createPlayer(withInstanceOf(Player.class));
+            result = playerCreation;
+        }};
+        try {
+            getWebTarget().path("player/create").request(MediaType.APPLICATION_JSON_TYPE)
+                    .accept(MediaType.APPLICATION_JSON_TYPE)
+                    .post(Entity.json(player), PlayerCreation.class);
+        } catch (ClientErrorException e) {
+            Response response = e.getResponse();
+            assertThat(response.getStatus()).isEqualTo(Response.Status.CONFLICT.getStatusCode());
+            PlayerCreation pc = response.readEntity(PlayerCreation.class);
+            assertThat(pc.getStatus().equals(PlayerCreation.Status.KO));
+        }
+        new Verifications() {{
+            Player capPlayer;
+            playerService.createPlayer(capPlayer = withCapture());
+            times = 1;
+
+            assertThat(capPlayer.getName().equals(player.getName()));
+            assertThat(capPlayer.getAccountId().equals(player.getAccountId()));
         }};
 
     }

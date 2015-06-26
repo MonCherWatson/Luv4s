@@ -21,12 +21,23 @@ luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchRes
 
 luv4sControllers.controller("signUpCtrl", function($scope, $http) {
     $scope.submit = function() {
+        $scope.signUpErrors = {}
         $http.post('http://localhost:8080/api/player/create', $scope.player).
           success(function(data, status, headers, config) {
-            console.log("success");
+            console.log("signUp success");
           }).
           error(function(data, status, headers, config) {
-            console.log("error");
+            console.log("signUp error");
+            if(status == 409) {
+            var fields = data.fields;
+                for (var property in fields) {
+                    if (fields.hasOwnProperty(property)) {
+                        $scope.signUpForm[property].$setValidity('server', false)
+                        $scope.signUpErrors[property] = fields[property];
+                    }
+                }
+            }
+
           });
     }
 });

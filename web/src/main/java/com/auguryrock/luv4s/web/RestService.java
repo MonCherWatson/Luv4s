@@ -68,12 +68,18 @@ public class RestService {
         }
     }
 
+
     @Path("/player/create")
     @POST
-    public PlayerCreation createAccount(Player player) {
+    public Response createAccount(Player player) {
         logger.info("Create player: "+player.getName());
-        return playerService.createPlayer(player);
+        PlayerCreation playerCreation = playerService.createPlayer(player);
+        if (PlayerCreation.Status.KO.equals(playerCreation.getStatus())) {
+            return Response.status(Response.Status.CONFLICT).entity(playerCreation).build();
+        }
+        return Response.status(Response.Status.OK).entity(playerCreation).build();
     }
+
 
     @Path("/translations")
     @GET
