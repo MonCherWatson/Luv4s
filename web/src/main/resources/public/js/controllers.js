@@ -22,7 +22,7 @@ luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchRes
 luv4sControllers.controller("signUpCtrl", function($scope, $http, authService) {
     $scope.submit = function() {
         $scope.signUpErrors = {}
-        $http.post('http://localhost:8080/api/player/create', $scope.player).
+        $http.post('http://localhost:8080/api/player', $scope.player).
           success(function(data, status, headers, config) {
             authService.login($scope.player.name, $scope.player.password);
           }).

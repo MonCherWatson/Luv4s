@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -48,9 +49,9 @@ public class SecurityServiceTest {
         securityService.getPlayerNameFromToken("foo.foo.");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = BadCredentialsException.class)
     public void testWrongPlayerName() {
-        securityService.getAuthorities("foo", "foo");
+        securityService.getAuthorities(null, "foo");
     }
 
     @Test
@@ -59,7 +60,7 @@ public class SecurityServiceTest {
         player.setName("scout");
         playerRepository.save(player);
 
-        assertThat(securityService.getAuthorities("scout", "foo")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()));
+        assertThat(securityService.getAuthorities(player, "foo")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()));
     }
 
     @Test
@@ -77,7 +78,7 @@ public class SecurityServiceTest {
         role.setRoleType(RoleType.master);
         roleRepository.save(role);
 
-        assertThat(securityService.getAuthorities("scout", "key")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()),
+        assertThat(securityService.getAuthorities(player, "key")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()),
                 new SimpleGrantedAuthority(RoleType.master.toString()));
 
 

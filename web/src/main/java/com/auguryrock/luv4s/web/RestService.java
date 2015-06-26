@@ -2,8 +2,10 @@ package com.auguryrock.luv4s.web;
 
 import com.auguryrock.luv4s.domain.*;
 import com.auguryrock.luv4s.domain.scouting.Player;
+import com.auguryrock.luv4s.domain.scouting.ScoutingKey;
 import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
 import com.auguryrock.luv4s.service.MatchupService;
+import com.auguryrock.luv4s.service.ScoutingService;
 import com.auguryrock.luv4s.service.TranslationService;
 import com.auguryrock.luv4s.service.player.PlayerCreation;
 import com.auguryrock.luv4s.service.player.PlayerService;
@@ -39,6 +41,8 @@ public class RestService {
     private SecurityService securityService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private ScoutingService scoutingService;
 
 
     @Path("/matches")
@@ -57,11 +61,12 @@ public class RestService {
         return matchupService.getMatch(id);
     }
 
-    @Path("/player/login/{player}/{password}")
+    @Path("/login/{player}/{password}")
     @GET
     public Response getToken(@PathParam("player") String user, @PathParam("password") String password) {
         try {
-            String jwt = securityService.checkCredentialsAndGenerateJwt(user, password);
+            Player player = playerService.findByNameAndPassword(user, password);
+            String jwt = securityService.checkCredentialsAndGenerateJwt(player);
             return Response.status(Response.Status.OK).entity(new TokenResponse(jwt)).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.FORBIDDEN).build();
@@ -69,7 +74,7 @@ public class RestService {
     }
 
 
-    @Path("/player/create")
+    @Path("/player")
     @POST
     public Response createAccount(Player player) {
         logger.info("Create player: "+player.getName());
@@ -87,12 +92,10 @@ public class RestService {
         return translationService.getTranslationsByLanguage(language);
     }
 
-    @Path("/scoutingsessions")
-    @GET
-    public List<ScoutingSession> getScoutingSessions() {
-        logger.info(SecurityContextHolder.getContext().getAuthentication().getName());
-        logger.info(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
-        return Collections.EMPTY_LIST;
+    @Path("/key/{worldId}")
+    @POST
+    public ScoutingKey createScoutingKey(@PathParam("player") Integer worldId) {
+        return scoutingService.createScoutingKey(worldId);
     }
 
     public void setMatchupService(MatchupService matchupService) {

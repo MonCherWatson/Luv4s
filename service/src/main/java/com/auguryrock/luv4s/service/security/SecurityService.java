@@ -1,13 +1,16 @@
 package com.auguryrock.luv4s.service.security;
 
-import com.auguryrock.luv4s.domain.scouting.*;
-import com.auguryrock.luv4s.service.player.PlayerService;
+import com.auguryrock.luv4s.domain.scouting.Player;
+import com.auguryrock.luv4s.domain.scouting.Role;
+import com.auguryrock.luv4s.domain.scouting.RoleRepository;
+import com.auguryrock.luv4s.domain.scouting.RoleType;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -30,8 +33,8 @@ public class SecurityService {
     private Key key;
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private PlayerService playerService;
+//    @Autowired
+//    private PlayerService playerService;
 
     @PostConstruct
     public void init() throws IOException, ClassNotFoundException {
@@ -40,19 +43,15 @@ public class SecurityService {
         key = (Key) objectInputStream.readObject();
     }
 
-    public String checkCredentialsAndGenerateJwt(String playerName, String password) {
-        Player player = checkPlayer(playerName);
-        if (!player.getPassword().equals(password)) {
-            throw new BadCredentialsException("Invalid password for user: " + playerName + "!");
-        }
+    public String checkCredentialsAndGenerateJwt(Player player) {
+        checkPlayer(player);
         return generateJwt(player);
     }
 
 
-    protected Player checkPlayer(String playerName) {
-        Player player = playerService.findByName(playerName);
+    protected Player checkPlayer(Player player) {
         if (player == null) {
-            throw new BadCredentialsException("Player doesnt exist: " + playerName + "!");
+            throw new BadCredentialsException("Player doesn't exist.");
         }
         return player;
     }
@@ -70,18 +69,21 @@ public class SecurityService {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public Set<GrantedAuthority> getAuthorities(String username, String scoutingKey) {
-        checkPlayer(username);
+    public Set<GrantedAuthority> getAuthorities(Player player, String scoutingKey) {
+        checkPlayer(player);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(RoleType.basic.toString()));
 
-
-        Role role = roleRepository.findByUserAndScoutingKey(username, scoutingKey);
+        Role role = roleRepository.findByPlayerAndScoutingKey(player, scoutingKey);
         if (role != null) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleType().toString()));
         }
         return grantedAuthorities;
+    }
+
+    public Player getCurrentPlayer() {
+        return (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 }

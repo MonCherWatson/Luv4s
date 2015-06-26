@@ -18,6 +18,10 @@ public class PlayerService {
         return playerRepository.findByName(name);
     }
 
+    public Player findByNameAndPassword(String name, String password) {
+        return playerRepository.findByName(name);
+    }
+
     public PlayerCreation createPlayer(Player player) {
         PlayerCreation playerCreation = new PlayerCreation();
 

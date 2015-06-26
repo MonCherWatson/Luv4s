@@ -7,7 +7,7 @@ var luv4sApp = angular.module('luv4sApp', ['ngResource',
      'services']);
 
 luv4sApp.config(['$routeProvider',
-  function($routeProvider) {
+    function($routeProvider) {
     $routeProvider.
       when('/matches', {
         templateUrl: 'partials/matches.html',
@@ -17,16 +17,19 @@ luv4sApp.config(['$routeProvider',
         templateUrl: 'partials/match.html',
         controller: 'matchCtrl'
       }).
-       when('/player/signUp', {
-              templateUrl: 'partials/signUp.html',
-              controller: 'signUpCtrl'
-            }).
-            when('/player/login', {
-                          templateUrl: 'partials/login.html',
-                          controller: 'loginCtrl'
-                        }).
+      when('/signUp', {
+        templateUrl: 'partials/signUp.html',
+        controller: 'signUpCtrl'
+       }).
+       when('/login', {
+         templateUrl: 'partials/login.html',
+         controller: 'loginCtrl'
+       }).
+       when('/nav', {
+                templateUrl: 'partials/nav.html'
+              }).
       otherwise({
-        redirectTo: '/matches'
+        redirectTo: '/nav'
       });
   }]);
 

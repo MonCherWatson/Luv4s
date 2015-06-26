@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.service.security;
 
+import com.auguryrock.luv4s.domain.scouting.Player;
 import com.auguryrock.luv4s.service.player.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -26,10 +27,13 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
         try {
             PreJwtAuthentication preJwtAuthentication = (PreJwtAuthentication) authentication;
             String token = preJwtAuthentication.getJwt();
-            String username = securityService.getPlayerNameFromToken(token);
-            Set<GrantedAuthority> grantedAuthorities = securityService.getAuthorities(username, preJwtAuthentication.getRequestDetails().getScoutingKey());
+            String playerName = securityService.getPlayerNameFromToken(token);
 
-            JwtAuthentication jwtAuthentication = new JwtAuthentication(username, grantedAuthorities);
+            Player player = playerService.findByName(playerName);
+
+            Set<GrantedAuthority> grantedAuthorities = securityService.getAuthorities(player, preJwtAuthentication.getRequestDetails().getScoutingKey());
+
+            JwtAuthentication jwtAuthentication = new JwtAuthentication(player, grantedAuthorities);
             jwtAuthentication.setDetails(preJwtAuthentication.getDetails());
 
             return jwtAuthentication;

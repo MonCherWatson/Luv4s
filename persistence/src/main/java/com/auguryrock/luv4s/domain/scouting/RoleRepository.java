@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface RoleRepository extends Repository<Role, Integer>, CrudRepository<Role, Integer> {
 
-    @Query("select r from Role r where r.player.name = ?1 and r.scoutingKey.token = ?2")
-    public Role findByUserAndScoutingKey(String username, String scoutingKey);
+    @Query("select r from Role r where r.player = ?1 and r.scoutingKey.uuid = ?2")
+    Role findByPlayerAndScoutingKey(Player player, String scoutingKey);
 }

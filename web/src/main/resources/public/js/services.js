@@ -5,7 +5,7 @@ services.factory('authService', function ($http, $window, $rootScope) {
 
   authService.login = function (name, password) {
     return $http
-      .get('http://localhost:8080/api/player/login/'+name+'/'+password)
+      .get('http://localhost:8080/api/login/'+name+'/'+password)
       .then(function (resp) {
         $window.sessionStorage.token = resp.data.token;
         $rootScope.authenticated = true;

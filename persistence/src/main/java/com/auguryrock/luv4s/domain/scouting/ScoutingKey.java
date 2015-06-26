@@ -1,20 +1,34 @@
 package com.auguryrock.luv4s.domain.scouting;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.auguryrock.luv4s.domain.World;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * Created by MonCherWatson on 19/06/2015.
  */
 @Entity
 public class ScoutingKey {
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Id
-    private String token;
+    private String uuid;
+    @ManyToOne
+    private World world;
 
     public ScoutingKey() {
     }
 
-    public ScoutingKey(String token) {
-        this.token = token;
+    public ScoutingKey(World world) {
+        this.world = world;
+    }
+
+    public ScoutingKey(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

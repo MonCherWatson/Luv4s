@@ -1,5 +1,6 @@
 package com.auguryrock.luv4s.service.security;
 
+import com.auguryrock.luv4s.domain.scouting.Player;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,12 +10,12 @@ import java.util.Collection;
  * Created by MonCherWatson on 19/06/2015.
  */
 public class JwtAuthentication extends AbstractAuthenticationToken {
-    private String username;
+    private Player player;
 
 
-    public JwtAuthentication(String username, Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthentication(Player player, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
-        this.username = username;
+        this.player = player;
     }
 
     /**
@@ -34,6 +35,6 @@ public class JwtAuthentication extends AbstractAuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return username;
+        return player;
     }
 }
