@@ -10,6 +10,21 @@ luv4sControllers.controller("matchesCtrl", function($scope, matchesResource) {
     });
 });
 
+luv4sControllers.controller("worldCtrl", function($scope, $routeParams, matchResource) {
+    matchResource.get({ matchId: $routeParams.matchId }, function(data) {
+        $scope.match = data;
+        var worlds = $scope.match.worlds;
+        for (var world in worlds) {
+            if (worlds.hasOwnProperty(world)) {
+                if(worlds[world].id.toString() == $routeParams.worldId) {
+                    $scope.currentWorld = worlds[world];
+                }
+            }
+        }
+
+    });
+
+});
 
 
 luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchResource) {
@@ -22,7 +37,7 @@ luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchRes
 luv4sControllers.controller("signUpCtrl", function($scope, $http, authService) {
     $scope.submit = function() {
         $scope.signUpErrors = {}
-        $http.post('http://localhost:8080/api/player', $scope.player).
+        $http.post('/luv4s/api/player', $scope.player).
           success(function(data, status, headers, config) {
             authService.login($scope.player.name, $scope.player.password);
           }).

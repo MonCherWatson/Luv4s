@@ -38,6 +38,13 @@ public class ScoutingService {
         roleRepository.save(role);
 
         return scoutingKey;
-
     }
+
+//    @Transactional
+//    @PreAuthorize("isFullyAuthenticated()")
+//    public ScoutingSession createScoutingSession() {
+//
+//    }
+
+
 }

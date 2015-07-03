@@ -69,7 +69,7 @@ public class SecurityServiceTest {
         player.setName("scout");
         playerRepository.save(player);
 
-        ScoutingKey scoutingKey = new ScoutingKey("key");
+        ScoutingKey scoutingKey = new ScoutingKey();
         scoutingKeyRepository.save(scoutingKey);
 
         Role role = new Role();
@@ -78,7 +78,8 @@ public class SecurityServiceTest {
         role.setRoleType(RoleType.master);
         roleRepository.save(role);
 
-        assertThat(securityService.getAuthorities(player, "key")).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()),
+        assertThat(scoutingKey.getUuid()).isNotNull();
+        assertThat(securityService.getAuthorities(player, scoutingKey.getUuid())).containsExactly(new SimpleGrantedAuthority(RoleType.basic.toString()),
                 new SimpleGrantedAuthority(RoleType.master.toString()));
 
 

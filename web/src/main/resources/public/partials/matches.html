@@ -4,7 +4,7 @@
         <a href="#/match/{{match.id}}">{{match.id}}</a>
         <ul>
             <li ng-repeat="world in match.worlds | orderBy: 'colour'">
-                <span> {{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</span>
+                <a href="#/world/{{world.id}}/{{match.id}}">{{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</a>
             </li>
         </ul>
     </li>
@@ -17,7 +17,7 @@
         <a href="#/match/{{match.id}}">{{match.id}}</a>
         <ul>
             <li ng-repeat="world in match.worlds">
-                <span> {{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</span>
+                <a href="#/world/{{world.id}}/{{match.id}}">{{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</a>
             </li>
         </ul>
     </li>

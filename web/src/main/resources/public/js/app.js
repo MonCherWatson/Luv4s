@@ -17,6 +17,10 @@ luv4sApp.config(['$routeProvider',
         templateUrl: 'partials/match.html',
         controller: 'matchCtrl'
       }).
+        when('/world/:worldId/:matchId', {
+            templateUrl: 'partials/world.html',
+            controller: 'worldCtrl'
+        }).
       when('/signUp', {
         templateUrl: 'partials/signUp.html',
         controller: 'signUpCtrl'
@@ -35,17 +39,17 @@ luv4sApp.config(['$routeProvider',
 
 
   luv4sApp.factory('matchesResource', function($resource) {
-    return $resource("http://localhost:8080/api/matches?zone=:zone");
+    return $resource("/luv4s/api/matches?zone=:zone");
   });
 
 
 luv4sApp.factory('matchResource', function($resource) {
-    return $resource("http://localhost:8080/api/matches/:matchId");
+    return $resource("/luv4s/api/matches/:matchId");
   });
 
 
   luv4sApp.config(function($translateProvider) {
-      $translateProvider.useUrlLoader('http://localhost:8080/api/translations');
+      $translateProvider.useUrlLoader('/luv4s/api/translations');
       $translateProvider.preferredLanguage('fr');
   });
 
@@ -54,7 +58,7 @@ luv4sApp.factory('matchResource', function($resource) {
     return function (items) {
       return items.filter(function (item) {
         return /KEEP|TOWER|CASTLE/.test(item.description.type);
-//        return true;
       });
     };
   });
+
