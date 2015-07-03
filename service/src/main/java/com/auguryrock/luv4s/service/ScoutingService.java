@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Component
 public class ScoutingService {
@@ -39,6 +40,13 @@ public class ScoutingService {
 
         return scoutingKey;
     }
+
+
+    @Transactional
+    public List<ScoutingSession> findScoutingSessions(String scoutingKey, String objectiveId) {
+        return null;
+    }
+
 
 //    @Transactional
 //    @PreAuthorize("isFullyAuthenticated()")

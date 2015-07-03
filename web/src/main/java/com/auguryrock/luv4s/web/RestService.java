@@ -98,6 +98,15 @@ public class RestService {
         return scoutingService.createScoutingKey(worldId);
     }
 
+
+    @Path("/scoutingsessions")
+    @GET
+    public List<ScoutingSession> findScoutingSessions(@QueryParam("key") String scoutingKey, @QueryParam("objectiveId") String objectiveId) {
+        return null;
+    }
+
+
+
     public void setMatchupService(MatchupService matchupService) {
         this.matchupService = matchupService;
     }
