@@ -58,6 +58,9 @@ luv4sApp.factory('matchResource', function($resource) {
       $translateProvider.preferredLanguage('fr');
   });
 
+luv4sApp.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+})
 
   luv4sApp.filter('onlyHardStuff', function () {
     return function (items) {
