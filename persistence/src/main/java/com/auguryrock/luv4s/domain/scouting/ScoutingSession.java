@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.domain.scouting;
 
 import com.auguryrock.luv4s.domain.Objective;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,16 +10,27 @@ import java.util.Date;
 public class ScoutingSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer pk;
+    private Integer pk;
     private Date start;
     private Date end;
     private String description;
     @ManyToOne
     private Player player;
     @ManyToOne
+    @JsonIgnore
     private ScoutingKey scoutingKey;
     @ManyToOne
+    @JsonIgnore
     private Objective objective;
+
+    public ScoutingSession() {
+    }
+
+    public ScoutingSession(Date start, Date end, String description) {
+        this.start = start;
+        this.end = end;
+        this.description = description;
+    }
 
     public Date getStart() {
         return start;

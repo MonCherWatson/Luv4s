@@ -15,15 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -101,8 +100,15 @@ public class RestService {
 
     @Path("/scoutingsessions")
     @GET
-    public List<ScoutingSession> findScoutingSessions(@QueryParam("key") String scoutingKey, @QueryParam("objectiveId") String objectiveId) {
-        return null;
+    public List<ScoutingSession> findScoutingSessions(@QueryParam("key") String scoutingKey, @QueryParam("objectiveId") Integer objectiveId) {
+        return scoutingService.findScoutingSessions(scoutingKey, objectiveId);
+    }
+
+
+    @Path("/scoutingsessions")
+    @POST
+    public ScoutingSession createScoutingSession(JsonScoutingSession ssc) {
+        return scoutingService.createScoutingSession(ssc.start, ssc.end, ssc.description, ssc.key, ssc.objectiveId);
     }
 
 
@@ -121,5 +127,14 @@ public class RestService {
         public TokenResponse(String token) {
             this.token = token;
         }
+    }
+
+    protected static class JsonScoutingSession {
+        protected String key;
+        private Integer pk;
+        private Date start;
+        private Date end;
+        private String description;
+        protected Integer objectiveId;
     }
 }
