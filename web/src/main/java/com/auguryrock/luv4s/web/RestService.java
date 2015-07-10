@@ -78,8 +78,8 @@ public class RestService {
     @Path("/players")
     @POST
     public Response createAccount(JsonPlayer jp) {
-        logger.info("Create jp: "+jp.name);
-        logger.info("password: "+jp.password);
+        logger.info("Create jp: " + jp.name);
+        logger.info("password: " + jp.password);
 
         Player player = new Player(jp.name, jp.accountId, jp.password, jp.description);
         PlayerCreation playerCreation = playerService.createPlayer(player);
@@ -115,7 +115,6 @@ public class RestService {
     public ScoutingSession createScoutingSession(JsonScoutingSession ssc) {
         return scoutingService.createScoutingSession(ssc.start, ssc.end, ssc.description, ssc.key, ssc.objectiveId);
     }
-
 
 
     public void setMatchupService(MatchupService matchupService) {

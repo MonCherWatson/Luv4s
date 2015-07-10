@@ -31,6 +31,7 @@ public class PreJwtAuthentication extends AbstractAuthenticationToken {
     public RequestDetails getRequestDetails() {
         return (RequestDetails) getDetails();
     }
+
     public String getJwt() {
         return (String) getPrincipal();
     }

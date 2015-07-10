@@ -17,7 +17,8 @@ public class JsonWorldTranslationReader {
     public List<JsonWorldTranslation> getWorldTranslations() {
         final List<JsonWorldTranslation> list;
         try {
-            list = mapper.readValue(getClass().getResourceAsStream("/worlds.json"), new TypeReference<List<JsonWorldTranslation>>() { });
+            list = mapper.readValue(getClass().getResourceAsStream("/worlds.json"), new TypeReference<List<JsonWorldTranslation>>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }

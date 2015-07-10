@@ -42,7 +42,7 @@ public class Translation {
         return language;
     }
 
-    public static class TranslationId implements Serializable{
+    public static class TranslationId implements Serializable {
         public String nameKey;
         public Language language;
 

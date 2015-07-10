@@ -14,7 +14,8 @@ public class JsonObjectiveDescriptionReader {
     public Map<String, JsonObjectiveDescription> getObjectiveDescriptions() {
         final Map map;
         try {
-            map = mapper.readValue(getClass().getResourceAsStream("/objectives.json"), new TypeReference<Map<String, JsonObjectiveDescription>>() { });
+            map = mapper.readValue(getClass().getResourceAsStream("/objectives.json"), new TypeReference<Map<String, JsonObjectiveDescription>>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }

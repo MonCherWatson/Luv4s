@@ -34,15 +34,15 @@ subprojects {
         compile group: 'org.apache.cxf', name: 'cxf-rt-rs-security-cors', version: cxfVersion
         compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
-        compile(group:'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion){
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion) {
         }
         compile 'org.aspectj:aspectjweaver:1.8.5'
 
         compile 'io.jsonwebtoken:jjwt:0.5'
-        compile(group:'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion) {
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion) {
         }
 
-        testCompile(group:'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion){
+        testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
         }
         testCompile 'junit:junit:4.12'
         testCompile 'org.assertj:assertj-core:3.0.0'

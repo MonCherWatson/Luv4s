@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by MonCherWatson on 08/05/2015.
  */
 @Entity
-public class Objective implements Comparable<Objective>{
+public class Objective implements Comparable<Objective> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer pk;

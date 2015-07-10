@@ -19,7 +19,7 @@ import javax.servlet.Filter;
 @ImportResource({"/applicationContext-rest-client.xml", "/applicationContext-derby.xml"
         , "/applicationContext-rest-service.xml"})
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
+@EnableJpaRepositories(basePackages = "com.auguryrock.luv4s.domain")
 @EnableScheduling
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class Luv4sApplication {
@@ -33,6 +33,7 @@ public class Luv4sApplication {
     public Filter compressingFilter() {
         return new OpenEntityManagerInViewFilter();
     }
+
     public static void main(String[] args) {
         SpringApplication.run(Luv4sApplication.class);
     }

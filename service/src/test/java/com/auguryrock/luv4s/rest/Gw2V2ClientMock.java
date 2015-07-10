@@ -11,6 +11,7 @@ import java.util.List;
 public class Gw2V2ClientMock extends AbstractMockRestClient implements Gw2V2Client {
     @Override
     public List<JsonWorld> getWorlds(@QueryParam("ids") String ids, @QueryParam("lang") String lang) {
-        return unmarshallWithTypeReference("test-worlds.json", new TypeReference<List<JsonWorld>>() {});
+        return unmarshallWithTypeReference("test-worlds.json", new TypeReference<List<JsonWorld>>() {
+        });
     }
 }

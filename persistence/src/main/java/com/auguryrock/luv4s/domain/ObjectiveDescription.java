@@ -8,7 +8,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class ObjectiveDescription {
-    public static final String OBJECTIVE_DESCRIPTION= "objectiveDescription";
+    public static final String OBJECTIVE_DESCRIPTION = "objectiveDescription";
 
     @Id
     private Integer id;

@@ -11,9 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * Created by MonCherWatson on 15/05/2015.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.auguryrock.luv4s"}, excludeFilters=@ComponentScan.Filter(type = FilterType.ANNOTATION, value=Configuration.class))
+@ComponentScan(basePackages = {"com.auguryrock.luv4s"}, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class))
 @ImportResource("/applicationContext-derby.xml")
-@EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
+@EnableJpaRepositories(basePackages = "com.auguryrock.luv4s.domain")
 public class TestContextConfiguration {
     @Bean
     public Gw2V1Client gw2V1Client() {

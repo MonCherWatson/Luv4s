@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan(basePackages = {"com.auguryrock.luv4s.domain"})
 @ImportResource("/applicationContext-derby.xml")
-@EnableJpaRepositories(basePackages="com.auguryrock.luv4s.domain")
+@EnableJpaRepositories(basePackages = "com.auguryrock.luv4s.domain")
 public class TestContextConfiguration {
 }

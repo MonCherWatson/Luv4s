@@ -23,7 +23,7 @@ public class Matchup {
         this.id = id;
     }
 
-    public Matchup(){
+    public Matchup() {
     }
 
     public String getId() {

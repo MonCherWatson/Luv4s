@@ -13,7 +13,7 @@ public class WvWMap {
     protected Integer pk;
     protected Colour colour;
     @ManyToOne
-    @JoinColumn(name ="match_id")
+    @JoinColumn(name = "match_id")
     @JsonIgnore
     protected Matchup matchup;
     @OneToMany(cascade = CascadeType.ALL)

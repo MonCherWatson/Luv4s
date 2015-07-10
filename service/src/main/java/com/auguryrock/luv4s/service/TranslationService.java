@@ -35,7 +35,8 @@ public class TranslationService {
         translationRepository.save(entities);
     }
 
-    @Transactional void createObjectiveTranslation(String id, JsonObjectiveDescription json) {
+    @Transactional
+    void createObjectiveTranslation(String id, JsonObjectiveDescription json) {
         for (Map.Entry<String, String> entry : json.getNames().entrySet()) {
             Language lang = Language.valueOf(entry.getKey());
             Translation translation = new Translation(ObjectiveDescription.OBJECTIVE_DESCRIPTION + id, lang, entry.getValue());

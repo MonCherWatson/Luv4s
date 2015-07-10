@@ -33,7 +33,7 @@ public class SecurityServiceTest {
     ScoutingKeyRepository scoutingKeyRepository;
 
     @Test
-    public void testGoodToken()  {
+    public void testGoodToken() {
         Player player = new Player();
         player.setName("foo");
 

@@ -48,7 +48,7 @@ public class ObjectiveService {
 
             translationService.createObjectiveTranslation(key, value);
         }
-        logger.info(objectiveDescriptionRepository.count()+ " Objective Descriptions have been saved.");
+        logger.info(objectiveDescriptionRepository.count() + " Objective Descriptions have been saved.");
     }
 
     @Transactional
