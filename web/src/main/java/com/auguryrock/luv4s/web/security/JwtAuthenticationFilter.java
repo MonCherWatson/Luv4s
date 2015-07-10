@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -28,7 +29,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends GenericFilterBean {
     private final static Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
-    @Autowired
+    @Resource(name = "customAuthenticationManager")
     private AuthenticationManager authenticationManager;
 
 
@@ -45,8 +46,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 String scoutingKey = httpServletRequest.getParameter("scoutingKey");
                 RequestDetails requestDetails = new RequestDetails(ipAddress, scoutingKey);
                 PreJwtAuthentication preJwtAuthentication = new PreJwtAuthentication(token, requestDetails);
-
                 Authentication result = authenticationManager.authenticate(preJwtAuthentication);
+                logger.info("result:" + result);
                 if (result == null || !result.isAuthenticated()) {
                     throw new InternalAuthenticationServiceException("Unable to authenticate Domain Player for provided credentials");
                 }

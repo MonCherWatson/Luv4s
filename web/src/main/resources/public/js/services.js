@@ -19,14 +19,16 @@ services.factory('authService', function ($http, $window, $rootScope) {
 
 services.factory('authInterceptor', function ($rootScope, $q, $window) {
   return {
-    request: function (config) {
+    'request': function (config) {
       config.headers = config.headers || {};
-      if ($window.sessionStorage.token) {
-        config.headers.Authorization = 'X-Auth-Token ' + $rootScope.token;
+//      if ($window.sessionStorage.token) {
+      if ($rootScope.currentToken){
+//        config.headers.Authorization = 'X-Auth-Token ' + $rootScope.currentToken;
+        config.headers['X-Auth-Token'] = $rootScope.currentToken;
       }
       return config;
     },
-    response: function (response) {
+    'response': function (response) {
       if (response.status === 401) {
       }
       return response || $q.when(response);
