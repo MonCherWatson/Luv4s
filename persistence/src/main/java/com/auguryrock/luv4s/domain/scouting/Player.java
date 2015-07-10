@@ -19,6 +19,15 @@ public class Player {
     protected String password;
     protected String description;
 
+    public Player() {
+    }
+
+    public Player(String name, String accountId, String password, String description) {
+        this.name = name;
+        this.accountId = accountId;
+        this.password = password;
+        this.description = description;
+    }
 
     public Integer getPk() {
         return pk;

@@ -10,6 +10,7 @@ import com.auguryrock.luv4s.service.TranslationService;
 import com.auguryrock.luv4s.service.player.PlayerCreation;
 import com.auguryrock.luv4s.service.player.PlayerService;
 import com.auguryrock.luv4s.service.security.SecurityService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,10 +74,13 @@ public class RestService {
     }
 
 
-    @Path("/player")
+    @Path("/players")
     @POST
-    public Response createAccount(Player player) {
-        logger.info("Create player: "+player.getName());
+    public Response createAccount(JsonPlayer jp) {
+        logger.info("Create jp: "+jp.name);
+        logger.info("password: "+jp.password);
+
+        Player player = new Player(jp.name, jp.accountId, jp.password, jp.description);
         PlayerCreation playerCreation = playerService.createPlayer(player);
         if (PlayerCreation.Status.KO.equals(playerCreation.getStatus())) {
             return Response.status(Response.Status.CONFLICT).entity(playerCreation).build();
@@ -91,10 +95,10 @@ public class RestService {
         return translationService.getTranslationsByLanguage(language);
     }
 
-    @Path("/key/{worldId}")
+    @Path("/keys")
     @POST
-    public ScoutingKey createScoutingKey(@PathParam("player") Integer worldId) {
-        return scoutingService.createScoutingKey(worldId);
+    public ScoutingKey createScoutingKey(JsonNewKey newKey) {
+        return scoutingService.createScoutingKey(Integer.valueOf(newKey.wordId));
     }
 
 
@@ -136,5 +140,16 @@ public class RestService {
         private Date end;
         private String description;
         protected Integer objectiveId;
+    }
+
+    public static class JsonPlayer {
+        public String name;
+        public String accountId;
+        public String password;
+        public String description;
+    }
+
+    public static class JsonNewKey {
+        public String wordId;
     }
 }

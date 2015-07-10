@@ -1,6 +1,7 @@
 package com.auguryrock.luv4s.domain.scouting;
 
 import com.auguryrock.luv4s.domain.World;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,8 +17,10 @@ public class ScoutingKey {
     @Id
     private String uuid;
     @ManyToOne
+    @JsonIgnore
     private World world;
     @OneToMany
+    @JsonIgnore
     private Set<ScoutingSession> scoutingSessions;
 
     public ScoutingKey() {

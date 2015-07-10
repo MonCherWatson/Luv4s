@@ -32,6 +32,10 @@ luv4sApp.config(['$routeProvider',
        when('/nav', {
                 templateUrl: 'partials/nav.html'
               }).
+      when('/scoutingKey', {
+                      templateUrl: 'partials/scoutingKey.html',
+                                                                      controller: 'scoutingKeyCtrl'
+                    }).
       otherwise({
         redirectTo: '/nav'
       });
@@ -39,17 +43,18 @@ luv4sApp.config(['$routeProvider',
 
 
   luv4sApp.factory('matchesResource', function($resource) {
-    return $resource("/luv4s/api/matches?zone=:zone");
+    return $resource("http://localhost:8080/api/matches?zone=:zone");
   });
 
 
+
 luv4sApp.factory('matchResource', function($resource) {
-    return $resource("/luv4s/api/matches/:matchId");
+    return $resource("http://localhost:8080/api/matches/:matchId");
   });
 
 
   luv4sApp.config(function($translateProvider) {
-      $translateProvider.useUrlLoader('/luv4s/api/translations');
+      $translateProvider.useUrlLoader('http://localhost:8080/api/translations');
       $translateProvider.preferredLanguage('fr');
   });
 

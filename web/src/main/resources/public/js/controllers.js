@@ -10,14 +10,14 @@ luv4sControllers.controller("matchesCtrl", function($scope, matchesResource) {
     });
 });
 
-luv4sControllers.controller("worldCtrl", function($scope, $routeParams, matchResource) {
+luv4sControllers.controller("worldCtrl", function($scope, $rootScope, $routeParams, matchResource) {
     matchResource.get({ matchId: $routeParams.matchId }, function(data) {
         $scope.match = data;
         var worlds = $scope.match.worlds;
         for (var world in worlds) {
             if (worlds.hasOwnProperty(world)) {
                 if(worlds[world].id.toString() == $routeParams.worldId) {
-                    $scope.currentWorld = worlds[world];
+                    $rootScope.currentWorld = worlds[world];
                 }
             }
         }
@@ -37,7 +37,7 @@ luv4sControllers.controller("matchCtrl", function($scope, $routeParams, matchRes
 luv4sControllers.controller("signUpCtrl", function($scope, $http, authService) {
     $scope.submit = function() {
         $scope.signUpErrors = {}
-        $http.post('/luv4s/api/player', $scope.player).
+        $http.post('http://localhost:8080/api/players', $scope.player).
           success(function(data, status, headers, config) {
             authService.login($scope.player.name, $scope.player.password);
           }).
@@ -62,5 +62,21 @@ luv4sControllers.controller("loginCtrl", function(authService, $rootScope, $scop
     $scope.submit = function() {
         authService.login($scope.player.name, $scope.player.password);
         $scope.invalid = !($rootScope.authenticated === true);
+    }
+});
+
+luv4sControllers.controller("scoutingKeyCtrl", function($scope, $http, $rootScope) {
+    $scope.submit = function() {
+        var newKey = {};
+        newKey.wordId = $rootScope.currentWorld.id
+        $http.post('http://localhost:8080/api/keys/', newKey).
+          success(function(data, status, headers, config) {
+          console.log("Server response: ", data);
+            $rootScope.currentScoutingKey = data.uid;
+          }).
+          error(function(data, status, headers, config) {
+           console.log("oups something went wrong...");
+
+          });
     }
 });

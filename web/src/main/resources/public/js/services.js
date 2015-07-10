@@ -7,8 +7,9 @@ services.factory('authService', function ($http, $window, $rootScope) {
     return $http
       .get('http://localhost:8080/api/login/'+name+'/'+password)
       .then(function (resp) {
-        $window.sessionStorage.token = resp.data.token;
+        $rootScope.currentToken = resp.data.token;
         $rootScope.authenticated = true;
+        $rootScope.currentPlayerName = name;
       });
   };
 
@@ -21,7 +22,7 @@ services.factory('authInterceptor', function ($rootScope, $q, $window) {
     request: function (config) {
       config.headers = config.headers || {};
       if ($window.sessionStorage.token) {
-        config.headers.Authorization = 'X-Auth-Token ' + $window.sessionStorage.token;
+        config.headers.Authorization = 'X-Auth-Token ' + $rootScope.token;
       }
       return config;
     },
