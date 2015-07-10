@@ -108,7 +108,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
             result = new PlayerCreation();
         }};
 
-        PlayerCreation creation = getWebTarget().path("player").request(MediaType.APPLICATION_JSON_TYPE)
+        PlayerCreation creation = getWebTarget().path("players").request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.json(player), PlayerCreation.class);
 
@@ -139,7 +139,7 @@ public class RestServiceTest extends JAXRSTest<RestService> {
             result = playerCreation;
         }};
         try {
-            getWebTarget().path("player").request(MediaType.APPLICATION_JSON_TYPE)
+            getWebTarget().path("players").request(MediaType.APPLICATION_JSON_TYPE)
                     .accept(MediaType.APPLICATION_JSON_TYPE)
                     .post(Entity.json(player), PlayerCreation.class);
         } catch (ClientErrorException e) {
