@@ -1,6 +1,8 @@
 package com.auguryrock.luv4s.service.player;
 
-import com.auguryrock.luv4s.domain.scouting.*;
+import com.auguryrock.luv4s.domain.scouting.Player;
+import com.auguryrock.luv4s.domain.scouting.PlayerRepository;
+import com.auguryrock.luv4s.domain.scouting.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

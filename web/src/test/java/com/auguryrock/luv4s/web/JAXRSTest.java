@@ -5,7 +5,6 @@ import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
 import org.junit.After;
-import org.junit.Before;
 
 import java.util.ArrayList;
 import java.util.List;

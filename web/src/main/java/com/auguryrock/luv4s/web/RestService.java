@@ -1,6 +1,9 @@
 package com.auguryrock.luv4s.web;
 
-import com.auguryrock.luv4s.domain.*;
+import com.auguryrock.luv4s.domain.Language;
+import com.auguryrock.luv4s.domain.Matchup;
+import com.auguryrock.luv4s.domain.Translation;
+import com.auguryrock.luv4s.domain.Zone;
 import com.auguryrock.luv4s.domain.scouting.Player;
 import com.auguryrock.luv4s.domain.scouting.ScoutingKey;
 import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
@@ -10,7 +13,6 @@ import com.auguryrock.luv4s.service.TranslationService;
 import com.auguryrock.luv4s.service.player.PlayerCreation;
 import com.auguryrock.luv4s.service.player.PlayerService;
 import com.auguryrock.luv4s.service.security.SecurityService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)

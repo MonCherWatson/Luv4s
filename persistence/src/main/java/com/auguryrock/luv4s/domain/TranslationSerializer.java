@@ -1,6 +1,5 @@
 package com.auguryrock.luv4s.domain;
 
-import com.auguryrock.luv4s.domain.Translation;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;

@@ -4,7 +4,6 @@ import com.auguryrock.luv4s.service.security.PreJwtAuthentication;
 import com.auguryrock.luv4s.service.security.RequestDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;

@@ -1,7 +1,8 @@
 package com.auguryrock.luv4s.domain;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Matchup {

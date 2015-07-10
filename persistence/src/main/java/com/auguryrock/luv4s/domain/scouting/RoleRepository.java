@@ -1,11 +1,8 @@
 package com.auguryrock.luv4s.domain.scouting;
 
-import com.auguryrock.luv4s.domain.Translation;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
-
-import java.util.List;
 
 /**
  * Created by MonCherWatson on 19/06/2015.

@@ -10,12 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.ManyToOne;
 import javax.transaction.Transactional;
-import javax.ws.rs.QueryParam;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class ScoutingService {

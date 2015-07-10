@@ -2,8 +2,6 @@ package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.Translation;
 import com.auguryrock.luv4s.domain.TranslationRepository;
-import junit.framework.TestCase;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

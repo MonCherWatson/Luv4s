@@ -28,6 +28,7 @@ import java.util.Set;
 /**
  * Created by MonCherWatson on 19/06/2015.
  */
+//TODO: key in memory not hard coded
 @Component
 public class SecurityService {
     private Key key;

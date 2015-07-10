@@ -1,7 +1,6 @@
 package com.auguryrock.luv4s.service;
 
 import com.auguryrock.luv4s.domain.*;
-import com.auguryrock.luv4s.rest.JsonWorld;
 import com.auguryrock.luv4s.rest.*;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -11,7 +10,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class MatchupService {

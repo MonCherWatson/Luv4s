@@ -1,9 +1,5 @@
 package com.auguryrock.luv4s.rest;
 
-import com.auguryrock.luv4s.rest.Gw2V1Client;
-import com.auguryrock.luv4s.rest.JsonMatchDetails;
-import com.auguryrock.luv4s.rest.JsonMatches;
-
 import javax.ws.rs.QueryParam;
 
 /**

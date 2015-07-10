@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by MonCherWatson on 10/07/2015.
