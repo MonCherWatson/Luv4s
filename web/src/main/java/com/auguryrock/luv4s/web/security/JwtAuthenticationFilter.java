@@ -51,6 +51,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                     throw new InternalAuthenticationServiceException("Unable to authenticate Domain Player for provided credentials");
                 }
                 SecurityContextHolder.getContext().setAuthentication(result);
+            } else {
+                logger.info("No Jwt token");
             }
             chain.doFilter(request, response);
         } catch (AuthenticationException e) {

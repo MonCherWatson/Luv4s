@@ -14,6 +14,9 @@
         <ul>
             <li ng-repeat="objective in wvwMap.objectives | orderBy: 'description.id' | onlyHardStuff">
                 <span> {{ objective.description.nameKey | translate}}, {{ objective.owner.colour}}</span>
+                <form novalidate>
+                <input type="submit" ng-click="newScout(objective)" value="New scout"/>
+                </form>
             </li>
         </ul>
     </li>

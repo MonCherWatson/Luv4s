@@ -23,6 +23,8 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -113,7 +115,7 @@ public class RestService {
     @Path("/scoutingsessions")
     @POST
     public ScoutingSession createScoutingSession(JsonScoutingSession ssc) {
-        return scoutingService.createScoutingSession(ssc.start, ssc.end, ssc.description, ssc.key, ssc.objectiveId);
+        return scoutingService.createScoutingSession(ssc.start, ssc.end, ssc.description, ssc.key, ssc.objectivePk);
     }
 
 
@@ -133,13 +135,12 @@ public class RestService {
         }
     }
 
-    protected static class JsonScoutingSession {
-        protected String key;
-        private Integer pk;
-        private Date start;
-        private Date end;
-        private String description;
-        protected Integer objectiveId;
+    public static class JsonScoutingSession {
+        public String key;
+        public LocalDateTime start;
+        public LocalDateTime end;
+        public String description;
+        public Integer objectivePk;
     }
 
     public static class JsonPlayer {

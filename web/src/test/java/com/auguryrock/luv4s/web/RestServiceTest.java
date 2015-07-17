@@ -3,6 +3,7 @@ package com.auguryrock.luv4s.web;
 import com.auguryrock.luv4s.domain.Matchup;
 import com.auguryrock.luv4s.domain.Zone;
 import com.auguryrock.luv4s.domain.scouting.Player;
+import com.auguryrock.luv4s.domain.scouting.ScoutingSession;
 import com.auguryrock.luv4s.service.MatchupService;
 import com.auguryrock.luv4s.service.player.PlayerCreation;
 import com.auguryrock.luv4s.service.player.PlayerService;
@@ -24,6 +25,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -159,6 +161,23 @@ public class RestServiceTest extends JAXRSTest<RestService> {
 
     }
 
+    @Test
+    public void test_create_scouting_session() {
+        ScoutingSessionCreation scoutingSessionCreation = new ScoutingSessionCreation();
+        scoutingSessionCreation.description = "toto";
+        scoutingSessionCreation.end = new Date();
+        scoutingSessionCreation.start = new Date();
+        scoutingSessionCreation.key = "key";
+        scoutingSessionCreation.objectivePk = 1;
+
+        getWebTarget().path("scoutingsessions").request(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.json(scoutingSessionCreation), ScoutingSession.class);
+
+    }
+
+
+
     protected WebTarget getWebTarget() {
         Client client = ClientBuilder.newBuilder().newClient().register(JacksonJsonProvider.class);
         return client.target("http://localhost:8080/luv4s");
@@ -173,5 +192,13 @@ public class RestServiceTest extends JAXRSTest<RestService> {
     @Override
     protected Class<RestService> getResourceClass() {
         return RestService.class;
+    }
+
+    public static class ScoutingSessionCreation {
+        public String key;
+        public Date start;
+        public Date end;
+        public String description;
+        public Integer objectivePk;
     }
 }

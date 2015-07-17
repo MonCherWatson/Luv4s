@@ -2,6 +2,7 @@ subprojects {
     ext {
         springVersion = "4.1.6.RELEASE"
         springBootVersion = '1.2.4.RELEASE'
+        jacksonVersion = '2.5.4'
         cxfVersion = '3.0.3'
     }
 
@@ -32,8 +33,9 @@ subprojects {
         compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: cxfVersion
         compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxrs', version: cxfVersion
         compile group: 'org.apache.cxf', name: 'cxf-rt-rs-security-cors', version: cxfVersion
-        compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.5.1'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.1'
+        compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: jacksonVersion
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
+
         compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion) {
         }
         compile 'org.aspectj:aspectjweaver:1.8.5'

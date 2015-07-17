@@ -26,8 +26,10 @@ public abstract class JAXRSTest<T> {
         sf.setResourceClasses(getResourceClass());
 
         List<Object> providers = new ArrayList<>();
-        // add custom providers if any
-        providers.add(new JacksonJsonProvider());
+        // add custom roviders if any
+        CustomJacksonJsonProvider customJacksonJsonProvider = new CustomJacksonJsonProvider();
+        customJacksonJsonProvider.init();
+        providers.add(customJacksonJsonProvider);
         sf.setProviders(providers);
 
         sf.setResourceProvider(getResourceClass(),

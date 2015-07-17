@@ -64,4 +64,8 @@ public class Objective implements Comparable<Objective> {
     public int hashCode() {
         return pk.hashCode();
     }
+
+    public Integer getPk() {
+        return pk;
+    }
 }
