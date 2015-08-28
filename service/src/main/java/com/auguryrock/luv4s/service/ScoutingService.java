@@ -73,6 +73,10 @@ public class ScoutingService {
         Objective objective = objectiveRepository.findOne(objectivePk);
         ScoutingKey scoutingKey = scoutingKeyRepository.findOne(scoutingKeyUuid);
 
+        if (!objective.getOwner().equals(scoutingKey.getWorld())) {
+            throw new RuntimeException("Objective and Scouting Key don't belong to the same world");
+        }
+
         ScoutingSession scoutingSession = new ScoutingSession(startTime, endTime, description);
         scoutingSession.setPlayer(player);
         scoutingSession.setObjective(objective);

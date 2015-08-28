@@ -2,7 +2,8 @@
     <span>Current World</span>
     <br/>
     <span ng-bind="currentWorld.nameKey|translate"></span>
-    <br/><br/>
+    <br/>
+    <br/>
     <span>Matchup</span>
     <li ng-repeat="world in match.worlds">
         <span> {{ world.nameKey | translate }} ({{world.colour}}, {{world.score}})</span>
@@ -14,9 +15,16 @@
         <ul>
             <li ng-repeat="objective in wvwMap.objectives | orderBy: 'description.id' | onlyHardStuff">
                 <span> {{ objective.description.nameKey | translate}}, {{ objective.owner.colour}}</span>
-                <form novalidate>
-                <input type="submit" ng-click="newScout(objective)" value="New scout"/>
-                </form>
+                <div ng-hide="currentScoutingKey === undefined || objective.owner.id !== currentWorld.id">
+                    <ul>
+                        <li ng-repeat="scoutingSession in objective.scoutingSessions">
+                            <span> {{ scoutingSession.startTimestamp}}, {{ scoutingSession.endTimestamp}}, {{ scoutingSession.player.name}}</span>
+                        </li>
+                    </ul>
+                    <form novalidate>
+                        <input type="submit" ng-click="newScout(objective)" value="New scout" />
+                    </form>
+                </div>
             </li>
         </ul>
     </li>
