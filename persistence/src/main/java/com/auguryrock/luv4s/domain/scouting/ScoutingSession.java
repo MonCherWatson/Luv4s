@@ -4,18 +4,15 @@ import com.auguryrock.luv4s.domain.Objective;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 public class ScoutingSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pk;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Long startTimestamp;
+    private Long endTime;
     private String description;
     @ManyToOne
     private Player player;
@@ -29,25 +26,25 @@ public class ScoutingSession {
     public ScoutingSession() {
     }
 
-    public ScoutingSession(LocalDateTime start, LocalDateTime endTime, String description) {
-        this.startTime = start;
+    public ScoutingSession(Long start, Long endTime, String description) {
+        this.startTimestamp = start;
         this.endTime = endTime;
         this.description = description;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public Long getStartTimestamp() {
+        return startTimestamp;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setStartTimestamp(Long startTimestamp) {
+        this.startTimestamp = startTimestamp;
     }
 
-    public LocalDateTime getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 

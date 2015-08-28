@@ -63,8 +63,8 @@ public class ScoutingService {
 
     @Transactional
     @PreAuthorize("isFullyAuthenticated()")
-    public ScoutingSession createScoutingSession(LocalDateTime startTime,
-                                                 LocalDateTime endTime,
+    public ScoutingSession createScoutingSession(Long startTime,
+                                                 Long endTime,
                                                  String description,
                                                  String scoutingKeyUuid,
                                                  Integer objectivePk) {

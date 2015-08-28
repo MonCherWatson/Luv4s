@@ -23,9 +23,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Path("/")
@@ -137,8 +134,8 @@ public class RestService {
 
     public static class JsonScoutingSession {
         public String key;
-        public LocalDateTime start;
-        public LocalDateTime end;
+        public Long start;
+        public Long end;
         public String description;
         public Integer objectivePk;
     }

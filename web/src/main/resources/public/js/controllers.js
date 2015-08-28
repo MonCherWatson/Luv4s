@@ -32,11 +32,12 @@ luv4sControllers.controller("worldCtrl", function($scope, $rootScope, $routePara
 
     $scope.newScout = function(objective) {
         console.log(objective);
+        var startDate = new Date();
         var newSession = {};
         newSession.objectivePk = objective.pk
-        newSession.startTime = new Date();
-        newSession.endTime = new Date();
-        newSession.endTime.setHours(newSession.endTime.getHours() + 1);
+
+        newSession.start  = startDate.getTime();
+        newSession.end = newSession.start +60000;
         newSession.description = "1 hour only...";
         newSession.key = $rootScope.currentScoutingKey;
 
