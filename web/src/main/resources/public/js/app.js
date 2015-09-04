@@ -2,9 +2,13 @@
 
 var luv4sApp = angular.module('luv4sApp', ['ngResource',
     'pascalprecht.translate',
+    'ngAnimate',
     'ngRoute',
     'luv4sControllers',
-    'services'
+    'services',
+    'ngMaterial',
+    'ngAria',
+    'ngMessages'
 ]);
 
 luv4sApp.config(['$routeProvider',

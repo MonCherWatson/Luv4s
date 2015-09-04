@@ -97,15 +97,18 @@ luv4sControllers.controller("signUpCtrl", function($scope, $http, authService) {
             authService.login($scope.player.name, $scope.player.password);
         }).
         error(function(data, status, headers, config) {
-            console.log("signUp error");
+            $scope.signUpErrors.type = {};
             if (status == 409) {
+                $scope.signUpErrors.type.validation = true;
                 var fields = data.fields;
                 for (var property in fields) {
                     if (fields.hasOwnProperty(property)) {
-                        $scope.signUpForm[property].$setValidity('server', false)
-                        $scope.signUpErrors[property] = fields[property];
+                        $scope.signUpErrors[property] = {};
+                        $scope.signUpErrors[property][fields[property]]= true;
                     }
                 }
+            } else {
+                $scope.signUpErrors.type.server = true;
             }
 
         });

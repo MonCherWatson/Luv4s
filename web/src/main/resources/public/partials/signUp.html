@@ -1,23 +1,57 @@
 <div ng-controller="signUpCtrl">
-    <form name="signUpForm" ng-submit="submit()">
-        <div>
-            Name: <input type="text" name="name" ng-model="player.name" required=""></br>
-            <div ng-show="signUpForm.name.$dirty && signUpForm.name.$invalid">
-                <span ng-show="signUpForm.name.$error.server">{{ signUpErrors.name }}</span>
+    <md-content>
+        <form name="signUpForm" ng-submit="submit()">
+            <div ng-messages="signUpErrors.type" ng-show="signUpForm.$submitted">
+                <div ng-message="validation">Validation Error</div>
+                <div ng-message="server">Server/communication Error</div>
             </div>
-        </div>
-        <div>
-            Password: <input type="text" name="password" ng-model="player.password" required=""></br>
-        </div>
-        <div>
-            Gw2 AccountId: <input type="text" name="accountId" ng-model="player.accountId" required=""></br>
-            <div ng-show="signUpForm.accountId.$dirty && signUpForm.accountId.$invalid">
-                <span ng-show="signUpForm.name.$error.server">{{ signUpErrors.accountId }}</span>
-            </div>
-        </div>
-        <div>
-            Comments: <input type="text" name="description" ng-model="player.description"></br>
-        </div>
-        <input type="submit" value="Sign Up!"/>
-    </form>
+            <md-input-container>
+                <label>User Name</label>
+                <input name="name" ng-model="player.name" required md-maxlength="10" minlength="3">
+
+                <div ng-messages="signUpForm.name.$error" ng-show="signUpForm.name.$dirty">
+                    <div ng-message="required">This is required!</div>
+                    <div ng-message="md-maxlength">That's too long!</div>
+                    <div ng-message="minlength">That's too short!</div>
+                </div>
+                <div ng-messages="signUpErrors.name" ng-show="signUpForm.$submitted">
+                    <div ng-message="alreadyExits">alreadyExits</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input name="password" ng-model="player.password" required md-maxlength="10" minlength="3">
+                <div ng-messages="signUpForm.password.$error" ng-show="signUpForm.password.$dirty">
+                    <div ng-message="required">This is required!</div>
+                    <div ng-message="md-maxlength">That's too long!</div>
+                    <div ng-message="minlength">That's too short!</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Gw2 AccountId</label>
+                <input name="accountId" ng-model="player.accountId" required md-maxlength="10" minlength="3">
+
+                <div ng-messages="signUpForm.accountId.$error" ng-show="signUpForm.accountId.$dirty">
+                    <div ng-message="required">This is required!</div>
+                    <div ng-message="md-maxlength">That's too long!</div>
+                    <div ng-message="minlength">That's too short!</div>
+                </div>
+                <div ng-messages="signUpErrors.accountId" ng-show="signUpForm.$submitted">
+                    <div ng-message="alreadyExits">alreadyExits</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Comments</label>
+                <textarea name="description" ng-model="player.description" columns="1" md-maxlength="150"></textarea>
+
+                <div ng-messages="signUpForm.description.$error" ng-show="signUpForm.description.$dirty">
+                    <div ng-message="md-maxlength">That's too long!</div>
+                    <div ng-message="minlength">That's too short!</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-raised">Sign Up!</md-button>
+
+        </form>
+    </md-content>
 </div>
